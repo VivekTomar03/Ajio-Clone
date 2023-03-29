@@ -28,6 +28,7 @@ import React from "react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Hovermenu } from "./Hovermenu";
 
 export default function NavbarBottom() {
   const { isOpen, onToggle } = useDisclosure();
@@ -183,7 +184,7 @@ const DesktopNav = () => {
   );
 };
 
-const DesktopSubNav = ({ label, href, subLabel }) => {
+const DesktopSubNav = ({ label, href, subLabel, subLabel1, subLabel2 }) => {
   return (
     <Link
       href={href}
@@ -193,17 +194,24 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       rounded={"md"}
       _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
     >
-      <Stack direction={"row"} align={"center"}>
+      <Stack direction={"row"} align={"center"} 
+      zIndex={1}
+      >
         <Box>
           <Text
             transition={"all .3s ease"}
-            _groupHover={{ color: "pink.400" }}
+            // _groupHover={{ color: "pink.400" }}
             fontWeight={500}
           >
             {label}
           </Text>
           <Text fontSize={"sm"}>{subLabel}</Text>
+          <Text fontSize={"sm"}>{subLabel1}</Text>
+          <Text fontSize={"sm"}>{subLabel2}</Text>
+          <Text fontSize={"sm"}>{subLabel}</Text>
+          <Text fontSize={"sm"}>{subLabel}</Text>
         </Box>
+
         <Flex
           transition={"all .3s ease"}
           transform={"translateX(-10px)"}
@@ -223,6 +231,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 const MobileNav = () => {
   return (
     <Stack
+    zIndex={1}
       bg={useColorModeValue("white", "gray.800")}
       p={4}
       display={{ md: "none" }}
@@ -240,6 +249,7 @@ const MobileNavItem = ({ label, children, href }) => {
   return (
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex
+      zIndex={1}
         py={2}
         as={Link}
         href={href ?? "#"}
@@ -257,6 +267,7 @@ const MobileNavItem = ({ label, children, href }) => {
         </Text>
         {children && (
           <Icon
+          zIndex={1}
             as={ChevronDownIcon}
             transition={"all .25s ease-in-out"}
             transform={isOpen ? "rotate(180deg)" : ""}
@@ -292,13 +303,8 @@ const NAV_ITEMS = [
     label: "MEN",
     children: [
       {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
-        href: "#",
-      },
-      {
-        label: "New & Noteworthy",
-        subLabel: "Up-and-coming Designers",
+        label: "CATEGORIES",
+        subLabel: <Hovermenu />,
         href: "#",
       },
     ],
