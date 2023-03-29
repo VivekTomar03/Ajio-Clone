@@ -1,0 +1,67 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+#delete {
+  border: 3px solid red;
+  background: none;
+  padding: 5px;
+  font-size: 16px;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#delete:hover {
+  background-color: red;
+  color: white;
+}
+#edit {
+  border: 3px solid green;
+  background: none;
+  padding: 5px;
+  font-size: 16px;
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#edit:hover {
+  background-color: green;
+  color: white;
+}
+#image {
+  width: 30%;
+}
+#add {
+  float: right;
+  border: 3px solid #8000ff;
+  background: none;
+  padding: 5px;
+  font-size: 16px;
+  color: #8000ff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 20px;
+}
+#add:hover {
+  background-color: #8000ff;
+  color: white;
+}
+#new{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 20px;
+}
+
