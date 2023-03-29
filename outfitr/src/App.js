@@ -1,11 +1,21 @@
+
+
+import './App.css';
+
 import { Box, Container } from "@chakra-ui/react";
 import { Hovermenu } from "./Components/Hovermenu";
 import NavbarBottom from "./Components/NavbarBottom";
 import NavbarTop from "./Components/NavbarTop";
 import Homepage from "./Pages/Homepage";
 
+
+
+
+
 function App() {
   return (
+
+
     <Container maxW={"100%"} p={0} m={0}>
       <Box
         bgColor={"rgb(255, 255, 255)"}
