@@ -8,6 +8,7 @@ import AllRoute from "./MainRoute/AllRoute";
 
 
 
+
 function App() {
   return (
   <Container maxW={"100%"} p={0} m={0}>
@@ -36,6 +37,7 @@ function App() {
       </Box>
 
     </Container>
+  
   );
 }
 
