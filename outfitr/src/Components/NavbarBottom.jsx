@@ -28,7 +28,10 @@ import React from "react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Hovermenu } from "./Hovermenu";
+import HoverMenu from "../Pages/HoverMenu";
+import Hoverwoman from "../Pages/Hoverwoman";
+import Hoverkids from "../Pages/Hoverkids";
+import HoverHome from "../Pages/HoverHome";
 
 export default function NavbarBottom() {
   const { isOpen, onToggle } = useDisclosure();
@@ -88,10 +91,10 @@ export default function NavbarBottom() {
         </Flex>
 
         <Input
-          w={{ base: "100%", md: "300px" }}
+          w={{ base: "100%", md: "280px" }}
           mt="-.4rem"
           placeContent={"center"}
-          placeholder={`Search for products                             🔍`}
+          placeholder={`Search for products                        🔍`}
           size="sm"
           variant="filled"
           p={5}
@@ -137,13 +140,43 @@ export default function NavbarBottom() {
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Stack direction={"row"} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
+    <Stack direction={"row"} spacing={7}>
+      {NAV_ITEMS.map((navItem,idx) => (
+       idx===NAV_ITEMS.length-1||idx===NAV_ITEMS.length-2?(<Box key={navItem.label}>
+        <Popover trigger={"hover"} placement={"bottom-end"}>
+          <PopoverTrigger>
+            <Link
+              p={2}
+              href={navItem.href ?? "#"}
+              fontSize={"sm"}
+              fontWeight={500}
+              color={linkColor}
+            >
+              {navItem.label}
+            </Link>
+          </PopoverTrigger>
+
+          {navItem.children && (
+            <PopoverContent
+              border={0}
+              boxShadow={"xl"}
+              bg={popoverContentBgColor}
+              p={4}
+              rounded={"xl"}
+              minW={"sm"}
+            >
+              <Stack>
+                {navItem.children.map((child) => (
+                  <DesktopSubNav key={child.label} {...child} />
+                ))}
+              </Stack>
+            </PopoverContent>
+          )}
+        </Popover>
+      </Box>) :(<Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <Link
@@ -152,10 +185,6 @@ const DesktopNav = () => {
                 fontSize={"sm"}
                 fontWeight={500}
                 color={linkColor}
-                _hover={{
-                  textDecoration: "none",
-                  color: linkHoverColor,
-                }}
               >
                 {navItem.label}
               </Link>
@@ -178,62 +207,31 @@ const DesktopNav = () => {
               </PopoverContent>
             )}
           </Popover>
-        </Box>
+        </Box>)
       ))}
     </Stack>
   );
 };
 
-const DesktopSubNav = ({ label, href, subLabel, subLabel1, subLabel2 }) => {
+const DesktopSubNav = ({ label, href }) => {
   return (
-    <Link
-      href={href}
-      role={"group"}
-      display={"block"}
-      p={2}
-      rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
-    >
-      <Stack direction={"row"} align={"center"} 
-      zIndex={1}
-      >
+    <a role={"group"} display={"block"} p={2} rounded={"md"}>
+      <Stack direction={"row"} zIndex={1} gap={5}>
         <Box>
-          <Text
-            transition={"all .3s ease"}
-            // _groupHover={{ color: "pink.400" }}
-            fontWeight={500}
-          >
+          <Text transition={"all .3s ease"} fontWeight={500}>
             {label}
           </Text>
-          <Text fontSize={"sm"}>{subLabel}</Text>
-          <Text fontSize={"sm"}>{subLabel1}</Text>
-          <Text fontSize={"sm"}>{subLabel2}</Text>
-          <Text fontSize={"sm"}>{subLabel}</Text>
-          <Text fontSize={"sm"}>{subLabel}</Text>
         </Box>
-
-        <Flex
-          transition={"all .3s ease"}
-          transform={"translateX(-10px)"}
-          opacity={0}
-          _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
-          justify={"flex-end"}
-          align={"center"}
-          flex={1}
-        >
-          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
       </Stack>
-    </Link>
+    </a>
   );
 };
 
 const MobileNav = () => {
   return (
     <Stack
-    zIndex={1}
+      zIndex={1}
       bg={useColorModeValue("white", "gray.800")}
-      p={4}
       display={{ md: "none" }}
     >
       {NAV_ITEMS.map((navItem) => (
@@ -249,8 +247,8 @@ const MobileNavItem = ({ label, children, href }) => {
   return (
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex
-      zIndex={1}
-        py={2}
+        zIndex={1}
+        // py={2}
         as={Link}
         href={href ?? "#"}
         justify={"space-between"}
@@ -267,7 +265,7 @@ const MobileNavItem = ({ label, children, href }) => {
         </Text>
         {children && (
           <Icon
-          zIndex={1}
+            zIndex={1}
             as={ChevronDownIcon}
             transition={"all .25s ease-in-out"}
             transform={isOpen ? "rotate(180deg)" : ""}
@@ -288,7 +286,12 @@ const MobileNavItem = ({ label, children, href }) => {
         >
           {children &&
             children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+              <Link
+                key={child.label}
+                py={2}
+                href={child.href}
+                textDecoration="none"
+              >
                 {child.label}
               </Link>
             ))}
@@ -303,8 +306,7 @@ const NAV_ITEMS = [
     label: "MEN",
     children: [
       {
-        label: "CATEGORIES",
-        subLabel: <Hovermenu />,
+        label: <HoverMenu />,
         href: "#",
       },
     ],
@@ -313,13 +315,7 @@ const NAV_ITEMS = [
     label: "WOMEN",
     children: [
       {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
-        href: "#",
-      },
-      {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
+        label: <Hoverwoman/>,
         href: "#",
       },
     ],
@@ -328,30 +324,18 @@ const NAV_ITEMS = [
     label: "KIDS",
     children: [
       {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
+        label: <Hoverkids/>,
         href: "#",
       },
-      {
-        label: "New & Noteworthy",
-        subLabel: "Up-and-coming Designers",
-        href: "#",
-      },
-    ],
+    ]
   },
   {
-    label: "HOME AND KITCHEN",
+    label: "HOME",
     children: [
       {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
+        label: <HoverHome/>,
         href: "#",
       },
-      {
-        label: "New & Noteworthy",
-        subLabel: "Up-and-coming Designers",
-        href: "#",
-      },
-    ],
+    ]
   },
 ];

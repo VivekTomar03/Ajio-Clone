@@ -1,10 +1,13 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
 import React from "react";
+import Login from "../Pages/Login";
 
 const NavbarTop = () => {
   return (
-    <Container maxW={"100%"}>
-      <Flex w={["90%", "90%", "900%", "90%"]} m={4} gap={10} justify="flex-end">
+    <Container maxW={"100%"}
+    >
+      <Flex w={["90%", "90%", "900%", "90%"]} m={4} gap={10} justify="flex-end"
+      >
         <Box
           fontSize={".9rem"}
           fontFamily="monospace"
@@ -12,7 +15,7 @@ const NavbarTop = () => {
           cursor={"pointer"}
           opacity={0.7}
         >
-          Sign In / Join OUTFITR
+         <Login/> / Join OUTFITR
         </Box>
         <Box
           fontSize={".9rem"}
@@ -20,6 +23,7 @@ const NavbarTop = () => {
           fontWeight="bold"
           cursor={"pointer"}
           opacity={0.7}
+          mt={2}
         >
           Customer Care
         </Box>
@@ -30,7 +34,7 @@ const NavbarTop = () => {
           backgroundColor={"black"}
           color={"white"}
           mt={-8}
-          pt={8}
+          pt={10}
           pb={3}
           pl={5}
           pr={5}
