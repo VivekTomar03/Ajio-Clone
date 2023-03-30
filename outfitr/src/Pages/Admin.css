@@ -1,0 +1,159 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+#delete {
+  border: 3px solid red;
+  background: none;
+  padding: 5px;
+  font-size: 16px;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#delete:hover {
+  background-color: red;
+  color: white;
+}
+#edit {
+  border: 3px solid green;
+  background: none;
+  padding: 5px;
+  font-size: 16px;
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#edit:hover {
+  background-color: green;
+  color: white;
+}
+#image {
+  width: 30%;
+}
+#add {
+  border: 3px solid #8000ff;
+  background: none;
+  padding: 5px;
+  font-size: 16px;
+  color: #8000ff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  float:right;
+  margin-bottom: 10px;
+}
+#add:hover {
+  background-color: #8000ff;
+  color: white;
+}
+table {
+  margin: auto;
+}
+th {
+  border: 1px solid;
+  padding: 10px 20px 10px 20px;
+  background-color: black;
+  color: white;
+  position: sticky;
+  top: 0;
+}
+tr {
+  text-align: center;
+  border-bottom: 1px solid;
+}
+#image {
+  margin: auto;
+  display: block;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+#div {
+  width: 100%;
+  height: 73vh;
+  overflow: auto;
+  margin: auto;
+}
+#new {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 20px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+input{
+    border: 1px solid;
+    padding: 10px;
+}
+input[type="submit"]{
+    background-color: #8000ff;
+    border-radius:5px;
+    color: white;
+    font-weight: bolder;
+    width: 50%;
+    margin: auto;
+    cursor: pointer;
+}
+.main{
+  display: flex;
+ }
+ .LeftPart{
+     width: 20%;
+    
+     padding: 10px;
+     padding-left: 10px;
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+     font-size: larger;
+     background-color: rgb(160, 157, 157);
+     padding-top: 50px;
+     color: white;
+     font-weight: bold;
+ 
+ }
+.custom-ui{
+  border: 2px solid;
+  padding: 20px;
+  text-align: center;
+}
+.custom-ui h1{
+  font-size: 25px;
+  font-weight: bolder;
+  padding: 10px;
+}
+#no{
+  margin: 20px;
+  padding: 10px;
+  background-color: green;
+  font-weight: bolder;
+  color: white;
+}
+#yes{
+  margin: 20px;
+  padding: 10px;
+  background-color: red;
+  font-weight: bolder;
+  color: white;
+}
+#no:hover,#yes:hover{
+  border-radius: 10px;
+}
