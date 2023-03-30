@@ -1,15 +1,11 @@
-
-
 import { Box, Container } from "@chakra-ui/react";
 import { Hovermenu } from "./Components/Hovermenu";
 import NavbarBottom from "./Components/NavbarBottom";
 import NavbarTop from "./Components/NavbarTop";
+import Admin from "./Pages/Admin";
+import AdminPage from "./Pages/AdminPage";
+import Payment from "./Pages/Payment";
 import Homepage from "./Pages/Homepage";
-
-
-
-
-
 function App() {
   return (
   <Container maxW={"100%"} p={0} m={0}>
@@ -27,7 +23,9 @@ function App() {
         <NavbarBottom />
       </Box>
       <Homepage/>
-     
+      <Admin/>
+      <AdminPage/>
+      <Payment/>
     </Container>
 
   );
