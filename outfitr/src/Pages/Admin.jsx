@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Admin.css";
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Modal,
   ModalOverlay,
@@ -20,6 +20,7 @@ import {
   Heading,
   Center,
 } from "@chakra-ui/react";
+import { Spinner } from '@chakra-ui/react'
 import { AiOutlineHome } from "react-icons/ai";
 import { RiDatabase2Line, RiAdminLine } from "react-icons/ri";
 import { MdProductionQuantityLimits } from "react-icons/md";
@@ -28,7 +29,8 @@ import { FiUserPlus } from "react-icons/fi";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 export default function Admin() {
-  const navigate=useNavigate()
+  const location = useLocation();
+  const end=(location.state.endpoint)
   const { isOpen: isAdd, onOpen: onAdd, onClose: onAddClose } = useDisclosure();
   const {
     isOpen: isEdit,
@@ -41,18 +43,20 @@ export default function Admin() {
   const [category, setcategory] = useState();
   const [brand, setbrand] = useState();
   const [image, setimage] = useState();
-  const [url, seturl] = useState(`https://embarrassed-fly-yoke.cyclic.app/women`);
+  const [url, seturl] = useState(`https://embarrassed-fly-yoke.cyclic.app/${end}`);
   const [etitle, setetitle] = useState();
   const [eprice, seteprice] = useState();
   const [ecategory, setecategory] = useState();
   const [ebrand, setebrand] = useState();
   const [eimage, seteimage] = useState();
   const [eid, seteid] = useState();
+  const [loader, setloader] = useState(true);
   useEffect(() => {
     fetch(`${url}`)
       .then((res) => res.json())
       .then((data) => setdata(data.reverse()));
-  }, []);
+    setloader(false)
+  });
   const onadd = (e) => {
     e.preventDefault()
     let discount = Math.floor(Math.random() * (50 - 20)) + 20;
@@ -70,10 +74,9 @@ export default function Admin() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(obj),
-    });
-    // navigate("/admin")
+    })
+    onAddClose()
   };
-
   const Aa = (e) => {
     fetch(`${url}/${e}`)
       .then((res) => res.json())
@@ -101,7 +104,7 @@ export default function Admin() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(obj),
     });
-    // navigate("/admin")
+    onEditClose()
   };
   const Delete = (e) => {
     confirmAlert({
@@ -119,7 +122,6 @@ export default function Admin() {
                   method: "DELETE",
                 });
                 onClose();
-                // navigate("/admin")
               }}
             >
               Yes, Delete it!
@@ -179,7 +181,15 @@ export default function Admin() {
         </Text>
         <Text _hover={{ color: "orange" }}>Logout</Text>
       </Box>
-      <div style={{ display: "flex", flexDirection: "column",marginTop:"15px" }}>
+      {loader?<Spinner
+  thickness='4px'
+  speed='0.65s'
+  emptyColor='gray.200'
+  color='blue.500'
+  size='xl'
+  m='auto'
+/>:
+      <div style={{ display: "flex", flexDirection: "column",paddingTop:"15px",margin:"auto" }}>
         <div>
           <button onClick={onAdd} id="add">
             Add New Product
@@ -234,7 +244,7 @@ export default function Admin() {
             </tbody>
           </table>
         </div>
-      </div>
+      </div>}
       <Modal isOpen={isAdd} onClose={onAddClose}>
         <ModalOverlay />
         <ModalContent>

@@ -50,7 +50,7 @@
   font-weight: bold;
   cursor: pointer;
   border-radius: 5px;
-  float:right;
+  float: right;
   margin-bottom: 10px;
 }
 #add:hover {
@@ -91,69 +91,78 @@ tr {
   padding: 2rem;
   gap: 20px;
 }
-form{
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    margin: auto;
-    gap: 20px;
-    padding-bottom: 20px;
-}
-input{
-    border: 1px solid;
-    padding: 10px;
-}
-input[type="submit"]{
-    background-color: #8000ff;
-    border-radius:5px;
-    color: white;
-    font-weight: bolder;
-    width: 50%;
-    margin: auto;
-    cursor: pointer;
-}
-.main{
+form {
   display: flex;
- }
- .LeftPart{
-     width: 20%;
-    
-     padding: 10px;
-     padding-left: 10px;
-     display: flex;
-     flex-direction: column;
-     gap: 10px;
-     font-size: larger;
-     background-color: rgb(160, 157, 157);
-     padding-top: 50px;
-     color: white;
-     font-weight: bold;
- 
- }
-.custom-ui{
+  flex-direction: column;
+  width: 70%;
+  margin: auto;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+input {
+  border: 1px solid;
+  padding: 10px;
+}
+input[type="submit"] {
+  background-color: #8000ff;
+  border-radius: 5px;
+  color: white;
+  font-weight: bolder;
+  width: 50%;
+  margin: auto;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  background-color: #8000ff;
+  border-radius: 5px;
+  color: white;
+  font-weight: bolder;
+  width: 50%;
+  margin: auto;
+  cursor: pointer;
+}
+.main {
+  display: flex;
+}
+.LeftPart {
+  width: 20%;
+
+  padding: 10px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: larger;
+  background-color: rgb(160, 157, 157);
+  padding-top: 50px;
+  color: white;
+  font-weight: bold;
+}
+.custom-ui {
   border: 2px solid;
   padding: 20px;
   text-align: center;
 }
-.custom-ui h1{
+.custom-ui h1 {
   font-size: 25px;
   font-weight: bolder;
   padding: 10px;
 }
-#no{
+#no {
   margin: 20px;
   padding: 10px;
   background-color: green;
   font-weight: bolder;
   color: white;
 }
-#yes{
+#yes {
   margin: 20px;
   padding: 10px;
   background-color: red;
   font-weight: bolder;
   color: white;
 }
-#no:hover,#yes:hover{
+#no:hover,
+#yes:hover {
   border-radius: 10px;
 }
