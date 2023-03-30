@@ -5,7 +5,7 @@ import {
   Grid,
   Flex,
   Image,
-  Heading,
+  Heading, 
   Center,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";

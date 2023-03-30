@@ -57,7 +57,7 @@ const Productpage = () => {
     setBrand3(false);
     setBrand4(true);
     setLowh("EYEBOGLER");
-  };
+  }; 
   return (
     <div style={{ maxWidth: "1262px", margin: "auto", marginTop: "32px" }}>
       <div style={{ marginTop: "2px", height: "24px" }}>
