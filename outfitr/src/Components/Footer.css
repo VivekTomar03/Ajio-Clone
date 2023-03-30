@@ -1,0 +1,17 @@
+.Social {
+  display: flex;
+
+  width: 300px;
+}
+.Social1 {
+  padding: 3px;
+  border: 1px solid white;
+}
+
+.Social2 {
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+.foot {
+  background-color: rgb(44, 65, 82);
+}

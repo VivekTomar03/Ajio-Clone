@@ -10,11 +10,11 @@ import { Box } from "@chakra-ui/react";
 export default function Slider1() {
   return (
     <Box
-      _hover={{
-        transform: "scale(1.03)",
-        transition: "all 0.8s ease-in-out  ",
-        cursor: "pointer",
-      }}
+      // _hover={{
+      //   transform: "scale(1.03)",
+      //   transition: "all 0.8s ease-in-out  ",
+      //   cursor: "pointer",
+      // }}
       w={{ base: "100%", md: "100%" }}
       mt={{ base: "0rem", md: "0rem", lg: ".2rem" }}
     >
@@ -27,7 +27,6 @@ export default function Slider1() {
           disableOnInteraction: false,
         }}
         modules={[Autoplay, Scrollbar]}
-        className="mySwiper"
       >
         <SwiperSlide>
           <img
@@ -35,6 +34,14 @@ export default function Slider1() {
             alt="img"
             style={{
               width: "100%",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = "scale(1.05)";
+              e.target.style.transition = "all 0.5s ease-in-out";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)";
+              e.target.style.transition = "all 0.5s ease-in-out";
             }}
           />
         </SwiperSlide>
@@ -45,6 +52,14 @@ export default function Slider1() {
             style={{
               width: "100%",
             }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = "scale(1.05)";
+              e.target.style.transition = "all 0.5s ease-in-out";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)";
+              e.target.style.transition = "all 0.5s ease-in-out";
+            }}
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -53,6 +68,14 @@ export default function Slider1() {
             alt="img"
             style={{
               width: "100%",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = "scale(1.05)";
+              e.target.style.transition = "all 0.5s ease-in-out";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)";
+              e.target.style.transition = "all 0.5s ease-in-out";
             }}
           />
         </SwiperSlide>
@@ -63,6 +86,14 @@ export default function Slider1() {
             style={{
               width: "100%",
             }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = "scale(1.05)";
+              e.target.style.transition = "all 0.5s ease-in-out";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)";
+              e.target.style.transition = "all 0.5s ease-in-out";
+            }}
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -71,6 +102,14 @@ export default function Slider1() {
             alt="img"
             style={{
               width: "100%",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = "scale(1.05)";
+              e.target.style.transition = "all 0.5s ease-in-out";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)";
+              e.target.style.transition = "all 0.5s ease-in-out";
             }}
           />
         </SwiperSlide>
@@ -81,6 +120,14 @@ export default function Slider1() {
             style={{
               width: "100%",
             }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = "scale(1.05)";
+              e.target.style.transition = "all 0.5s ease-in-out";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)";
+              e.target.style.transition = "all 0.5s ease-in-out";
+            }}
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -89,6 +136,14 @@ export default function Slider1() {
             alt="img"
             style={{
               width: "100%",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = "scale(1.05)";
+              e.target.style.transition = "all 0.5s ease-in-out";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)";
+              e.target.style.transition = "all 0.5s ease-in-out";
             }}
           />
         </SwiperSlide>

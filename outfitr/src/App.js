@@ -1,12 +1,16 @@
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, Image } from "@chakra-ui/react";
+import Footer from "./Components/Footer";
 import { Hovermenu } from "./Components/Hovermenu";
 import NavbarBottom from "./Components/NavbarBottom";
 import NavbarTop from "./Components/NavbarTop";
 import Homepage from "./Pages/Homepage";
+import Register from "./Pages/Register";
 
 function App() {
   return (
-    <Container maxW={"100%"} p={0} m={0}>
+    <Container maxW={"100%"} p={0} m={0}
+  
+    >
       <Box
         bgColor={"rgb(255, 255, 255)"}
         w={"100%"}
@@ -20,8 +24,16 @@ function App() {
         <NavbarTop />
         <NavbarBottom />
       </Box>
-      <Homepage/>
-     
+      <Homepage />
+      <Box style={{ cursor: "pointer" }} >
+        <Image
+          pb={{ base: "1rem", md: "1rem", lg: "1rem" }}
+          src="/care.png"
+          alt="heading"
+          w={{ base: "100%", md: "100%", lg: "100%" }}
+        />
+        <Footer />
+      </Box>
     </Container>
   );
 }
