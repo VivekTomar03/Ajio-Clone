@@ -1,36 +1,46 @@
 import React, { useRef, useState } from "react";
-
+// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/scrollbar";
 
-import { Scrollbar, Autoplay } from "swiper";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+
+import "./Slider4.modules.css";
+
+// import required modules
+import { EffectCoverflow, Pagination } from "swiper";
 import { Box } from "@chakra-ui/react";
 
-export default function Slider3() {
+export default function Slider4() {
   return (
     <Box
-      w={{ base: "100%", md: "100%" }}
-      mt={{ base: "0rem", md: "0rem", lg: ".2rem" }}
+      bgColor={"rgb(230, 180, 143)"}
+      p={{ base: "1rem", md: "1rem", lg: "2rem" }}
+      mt="-1rem"
+      mb={{ base: "1rem", md: "1rem", lg: "2rem" }}
     >
       <Swiper
-        scrollbar={{
-          hide: true,
+   
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={"auto"}
+        coverflowEffect={{
+          rotate: 15,
+          stretch: 4,
+          depth: 100,
+          modifier: 10,
+          slideShadows: true,
         }}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        modules={[Autoplay, Scrollbar]}
-    
+        pagination={true}
+        modules={[EffectCoverflow]}
+        className="mySwiper"
       >
         <SwiperSlide>
           <img
-            src="https://assets.ajio.com/cms/AJIO/WEB/29032023-UHP-D-Top-P2-MnS-Min40Extra35.jpg"
-            alt="img"
-            style={{
-              width: "100%",
-            }}
+            src="https://assets.ajio.com/cms/AJIO/WEB/D-UHP-Bestsellers-Menswestern-Starting299.jpg"
             onMouseEnter={(e) => {
               e.target.style.transform = "scale(1.05)";
               e.target.style.transition = "all 0.5s ease-in-out";
@@ -43,11 +53,7 @@ export default function Slider3() {
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="https://assets.ajio.com/cms/AJIO/WEB/29032023-UHP-D-Top-P3-PumaSkechers-Min40.jpg"
-            alt="img"
-            style={{
-              width: "100%",
-            }}
+            src="https://assets.ajio.com/cms/AJIO/WEB/D-UHP-Bestsellers-womenswestern-Starting199.jpg"
             onMouseEnter={(e) => {
               e.target.style.transform = "scale(1.05)";
               e.target.style.transition = "all 0.5s ease-in-out";
@@ -60,11 +66,7 @@ export default function Slider3() {
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="https://assets.ajio.com/cms/AJIO/WEB/29032023-UHP-D-Top-P4-Activewear-TSPerformax-Starting299.jpg"
-            alt="img"
-            style={{
-              width: "100%",
-            }}
+            src="https://assets.ajio.com/cms/AJIO/WEB/D-UHP-Bestsellers-WomensEthnic-Starting249.jpg"
             onMouseEnter={(e) => {
               e.target.style.transform = "scale(1.05)";
               e.target.style.transition = "all 0.5s ease-in-out";
@@ -77,11 +79,7 @@ export default function Slider3() {
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="https://assets.ajio.com/cms/AJIO/WEB/29032023-UHP-D-Top-P5-DealsLikeNeverBefore-Min60.jpg"
-            alt="img"
-            style={{
-              width: "100%",
-            }}
+            src="https://assets.ajio.com/cms/AJIO/WEB/D-UHP-Bestsellers-Footwear-upto80.jpg"
             onMouseEnter={(e) => {
               e.target.style.transform = "scale(1.05)";
               e.target.style.transition = "all 0.5s ease-in-out";
@@ -94,11 +92,7 @@ export default function Slider3() {
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="https://assets.ajio.com/cms/AJIO/WEB/29032023-UHP-D-Top-P6-Western-TIGCJP-Flat60.jpg"
-            alt="img"
-            style={{
-              width: "100%",
-            }}
+            src="https://assets.ajio.com/cms/AJIO/WEB/D-UHP-Bestsellers-kidswear-starting129.jpg"
             onMouseEnter={(e) => {
               e.target.style.transform = "scale(1.05)";
               e.target.style.transition = "all 0.5s ease-in-out";
@@ -111,11 +105,7 @@ export default function Slider3() {
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="https://assets.ajio.com/cms/AJIO/WEB/29032023-UHP-D-Top-P7-SmartFits-gantMnS-Min40Extra35.jpg"
-            alt="img"
-            style={{
-              width: "100%",
-            }}
+            src="https://assets.ajio.com/cms/AJIO/WEB/D-UHP-Bestsellers-accessories-starting179.jpg"
             onMouseEnter={(e) => {
               e.target.style.transform = "scale(1.05)";
               e.target.style.transition = "all 0.5s ease-in-out";
@@ -128,11 +118,20 @@ export default function Slider3() {
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="https://assets.ajio.com/cms/AJIO/WEB/29032023-UHP-D-Top-P1-Casuals-DennislingoGulmoharJiapur-Min60.jpg"
-            alt="img"
-            style={{
-              width: "100%",
+            src="https://assets.ajio.com/cms/AJIO/WEB/D-UHP-Bestsellers-DecorKitchen-upto80.jpg"
+            onMouseEnter={(e) => {
+              e.target.style.transform = "scale(1.05)";
+              e.target.style.transition = "all 0.5s ease-in-out";
             }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)";
+              e.target.style.transition = "all 0.5s ease-in-out";
+            }}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img
+            src="https://assets.ajio.com/cms/AJIO/WEB/D-UHP-Bestsellers-MensEthnicwear-upto80.jpg.jpg"
             onMouseEnter={(e) => {
               e.target.style.transform = "scale(1.05)";
               e.target.style.transition = "all 0.5s ease-in-out";

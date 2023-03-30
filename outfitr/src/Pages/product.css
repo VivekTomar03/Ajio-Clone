@@ -1,16 +1,17 @@
+
 #leftbox{
-    width: 240px;
+    width: 290px;
     /* maxHeight: 1000px; */
-    /* border: 1px solid red; */
+    border: 1px solid red;
     height: 1000px;
-    padding: 10px;
+    padding: 15px 14px 14px 14px;
 }
 
 #rightbox{
-    width: 960px;
+    width: 972px;
     height: 8298px;
     /* border: 1px solid brown; */
-    padding: 18px;
+   /* padding-left: "3px"; */
 }
 #leftbox-1menu{
    border:none;
@@ -18,9 +19,11 @@
 }
 .myclass:hover{
     cursor: pointer;
+    background-color: white;
 }
 input:hover{
     cursor: pointer;
+    background-color:white;
 }
 *{
     font-family: SourceSansPro;
@@ -33,6 +36,7 @@ label{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     background-color: #f9f9f9
+    ;align-items: center;
 }
 hr{
    border-color: #adacac;border-width: .5px;
@@ -43,30 +47,34 @@ hr{
 
 .text-overlay {
     position: absolute;
-    top: 81%;
+    top: 76.5%;
     left: 50%;
     transform: translate(-50%, -50%);
     visibility: hidden;
-    opacity: 1;
+    opacity: 5;
     background-color: rgba(238, 230, 230, 0.4);
     color: #fff;
     padding: 10px;
-    border-radius: 5px;
+  
     transition: visibility 0s, opacity 0.5s ease-in-out;
     width: 100%;
-    height: auto;
+    height: 40px;
     text-align: center;padding-top: 0%;
+    
 }
 
 .image-container:hover .text-overlay {
     visibility: visible;
     opacity: 1;
 }
+
 #griditem{
     margin-top: 30px;
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    gap:25px
+    gap:25px;
+    max-width: 100%;
+    justify-content: space-between;
 }
 #griditem:hover{
     cursor: pointer;
@@ -187,5 +195,5 @@ hr{
     }
 }
 .image-text{
-line-height: 45%;
+line-height: 125%;
 }
