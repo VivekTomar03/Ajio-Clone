@@ -1,291 +1,349 @@
 import React, { useEffect, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
-import { tableCellClasses } from "@mui/material/TableCell";
 import "./Admin.css";
-import { useReducer } from "react";
-import axios from "axios";
-import Skeleton from "@mui/material/Skeleton";
-import { Button, TextField } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete";
-import { Box, Card, Flex, Grid, Heading, Image, Text } from "@chakra-ui/react";
+import { useNavigate } from 'react-router-dom'
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Button,
+  Box,
+  Text,
+  Card,
+  Grid,
+  Flex,
+  Image,
+  Heading,
+  Center,
+} from "@chakra-ui/react";
 import { AiOutlineHome } from "react-icons/ai";
 import { RiDatabase2Line, RiAdminLine } from "react-icons/ri";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { AiOutlineSetting, AiOutlineAppstore } from "react-icons/ai";
 import { FiUserPlus } from "react-icons/fi";
-import Modal from "@mui/material/Modal";
-import { useNavigate } from "react-router-dom";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-};
-const initialState = {
-  data: [],
-  isLoading: false,
-  error: null,
-};
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "FETCH_REQUEST":
-      return {
-        ...state,
-        isLoading: true,
-        error: false,
-      };
-    case "FETCH_SUCCESS":
-      return {
-        ...state,
-        data: action.payload,
-        isLoading: false,
-        error: false,
-      };
-    case "FETCH_FAILURE":
-      return {
-        ...state,
-        data: [],
-        isLoading: false,
-        error: true,
-      };
-    default:
-      throw new Error();
-  }
-};
-let categorys = [
-  { label: "Kurtis" },
-  { label: "Sarees" },
-  { label: "Heels" },
-  { label: "Earings" },
-  { label: "Sunglasses" },
-  { label: "Pants" },
-  { label: "T-shirt" },
-  { label: "kurta" },
-  { label: "shirt" },
-  { label: "jeans" },
-];
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 export default function Admin() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { data, isLoading, error } = state;
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [title, settitle] = useState("");
-  const [price, setprice] = useState(0);
-  const [image, setimage] = useState("");
-  const [category, setcategory] = useState("");
-  const [brand, setbrand] = useState("");
-  const nav = useNavigate()
+  const navigate=useNavigate()
+  const { isOpen: isAdd, onOpen: onAdd, onClose: onAddClose } = useDisclosure();
+  const {
+    isOpen: isEdit,
+    onOpen: onEdit,
+    onClose: onEditClose,
+  } = useDisclosure();
+  const [data, setdata] = useState();
+  const [title, settitle] = useState();
+  const [price, setprice] = useState();
+  const [category, setcategory] = useState();
+  const [brand, setbrand] = useState();
+  const [image, setimage] = useState();
+  const [url, seturl] = useState(`https://embarrassed-fly-yoke.cyclic.app/women`);
+  const [etitle, setetitle] = useState();
+  const [eprice, seteprice] = useState();
+  const [ecategory, setecategory] = useState();
+  const [ebrand, setebrand] = useState();
+  const [eimage, seteimage] = useState();
+  const [eid, seteid] = useState();
   useEffect(() => {
-    dispatch({ type: "FETCH_REQUEST" });
-    axios
-      .get(`https://embarrassed-fly-yoke.cyclic.app/women`)
-      .then((res) => {
-        dispatch({ type: "FETCH_SUCCESS", payload: res.data.reverse() });
-      })
-      .catch((err) => {
-        dispatch({ type: "FETCH_FAILURE", payload: err });
-      });
+    fetch(`${url}`)
+      .then((res) => res.json())
+      .then((data) => setdata(data.reverse()));
   }, []);
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-  const padd = (e) => {
+  const onadd = (e) => {
     e.preventDefault()
     let discount = Math.floor(Math.random() * (50 - 20)) + 20;
     let offer_price = Math.floor(price - (discount / 100) * price);
     let obj = {
       title,
       price: +price,
-      image,
       category,
       brand,
+      image,
       discount,
       offer_price,
     };
-    fetch(`https://embarrassed-fly-yoke.cyclic.app/women`, {
+    fetch(`${url}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(obj),
     });
+    // navigate("/admin")
+  };
+
+  const Aa = (e) => {
+    fetch(`${url}/${e}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setetitle(data.title);
+        setebrand(data.brand);
+        seteimage(data.image);
+        seteprice(data.price);
+        setecategory(data.category);
+        seteid(data.id);
+      });
+  };
+  const onedit = (e) => {
+    e.preventDefault();
+    let obj = {
+      title: etitle,
+      price: +eprice,
+      category: ecategory,
+      brand: ebrand,
+      image: eimage,
+    };
+    console.log(obj);
+    fetch(`${url}/${eid}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(obj),
+    });
+    // navigate("/admin")
+  };
+  const Delete = (e) => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="custom-ui">
+            <h1>You want to delete this file?</h1>
+            <button id="no" onClick={onClose}>
+              No
+            </button>
+            <button
+              id="yes"
+              onClick={() => {
+                fetch(`${url}/${e}`, {
+                  method: "DELETE",
+                });
+                onClose();
+                // navigate("/admin")
+              }}
+            >
+              Yes, Delete it!
+            </button>
+          </div>
+        );
+      },
+    });
   };
   return (
-    <>
-      <Box
-        alignItems={"center"}
-        className="adminnavbar"
-        bg={"#159895"}
-        mb={0}
-        h={"60px"}
-        w="100%"
-        style={{
-          marginBottom: "0",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Heading marginLeft={50}>Master Admin</Heading>
-        <Heading marginRight={50}>Admin name</Heading>
-      </Box>
-      <Flex className="body" style={{ marginTop: "10" }}>
-        <Box
-          className="leftPart"
-          bg={"gray"}
-          w="20%"
-          style={{
-            marginTop: "0",
-            paddingTop: "20px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "start",
-          }}
-        >
-          <Text marginLeft={30} color={"white"}>
-            <AiOutlineHome /> Dashboard
-          </Text>
-          <Text marginLeft={30} color={"white"}>
-            <RiDatabase2Line /> Manage Order
-          </Text>
-          <Text marginLeft={30} color={"white"}>
-            <MdProductionQuantityLimits /> Manage Products
-          </Text>
-          <Text marginLeft={30} color={"white"}>
-            <AiOutlineSetting /> User Account Settings
-          </Text>
-          <Text marginLeft={30} color={"white"}>
+    <div className="main">
+      <Box className="LeftPart">
+        <Text _hover={{ color: "orange" }} display={"flex"} gap="10px">
+          <span style={{ marginTop: "5px" }}>
+            <AiOutlineHome />
+          </span>{" "}
+          Dashboard
+        </Text>
+        <Text _hover={{ color: "orange" }} display={"flex"} gap="10px">
+          <span style={{ paddingTop: "5px" }}>
+            <RiDatabase2Line />{" "}
+          </span>
+          Manage Order
+        </Text>
+        <Text _hover={{ color: "orange" }} display={"flex"} gap="10px">
+          <span style={{ paddingTop: "5px" }}>
+            <MdProductionQuantityLimits />
+          </span>
+          Manage Products
+        </Text>
+
+        <Text _hover={{ color: "orangered" }} display={"flex"} gap="10px">
+          <span style={{ paddingTop: "5px" }}>
+            <AiOutlineSetting />
+          </span>
+          Account Settings
+        </Text>
+
+        <Text _hover={{ color: "orange" }} display={"flex"} gap="10px">
+          <span style={{ paddingTop: "5px" }}>
+            {" "}
             <AiOutlineAppstore />
-            API Data Settings
-          </Text>
-          <Text marginLeft={30} color={"white"}>
-            <RiAdminLine /> Admin Managment
-          </Text>
-          <Text marginLeft={30} color={"white"}>
-            <FiUserPlus /> Add Admins
-          </Text>
-          <Text marginLeft={30} color={"white"}>
-            Logout
-          </Text>
-        </Box>
-        {isLoading ? (
-          <Skeleton />
-        ) : (
-          <div>
-            <button onClick={handleOpen} id="add">
-              Add New Product +
-            </button>
-            <Paper
-              sx={{ width: "100%", overflow: "hidden", marginTop: "20px" }}
-            >
-              <TableContainer sx={{ maxHeight: "77vh" }}>
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow sx={{ bgcolor: "primary.main" }}>
-                      <StyledTableCell align="center">No.</StyledTableCell>
-                      <StyledTableCell align="center">Brand</StyledTableCell>
-                      <StyledTableCell align="center">Image</StyledTableCell>
-                      <StyledTableCell align="center">Price</StyledTableCell>
-                      <StyledTableCell align="center">Category</StyledTableCell>
-                      <StyledTableCell align="center">Edit</StyledTableCell>
-                      <StyledTableCell align="center">Delete</StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {data?.map((row) => (
-                      <TableRow key={row.id}>
-                        <TableCell align="center" component="th" scope="row">
-                          {row.id}
-                        </TableCell>
-                        <TableCell align="center">{row.brand}</TableCell>
-                        <TableCell align="center">
-                          <img src={row.image} id="image" alt="" />
-                        </TableCell>
-                        <TableCell align="center">
-                          ₹
-                          {new Intl.NumberFormat("en-IN", {
-                            maximumSignificantDigits: 3,
-                          }).format(row.price)}
-                        </TableCell>
-                        <TableCell align="center">
-                          {(row.category)}
-                        </TableCell>
-                        <TableCell align="center">
-                          <button id="edit">Edit</button>
-                        </TableCell>
-                        <TableCell align="center">
-                          <button id="delete">Delete</button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Paper>
-          </div>
-        )}
-      </Flex>
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
-          <form action="" id="new">
-            <TextField
-              id="outlined-basic"
-              onChange={(e) => settitle(e.target.value)}
-              label="Title"
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-basic"
-              onChange={(e) => setprice(e.target.value)}
-              label="Price"
-              variant="outlined"
-            />
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={categorys}
-              sx={{ width: 336 }}
-              onChange={(event, value) => setcategory(value.label)}
-              renderInput={(params) => (
-                <TextField {...params} label="Category" />
-              )}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Brand"
-              onChange={(e) => setbrand(e.target.value)}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-basic"
-              label="Image"
-              onChange={(e) => setimage(e.target.value)}
-              variant="outlined"
-            />
-            <Button variant="contained" onClick={padd}>
-              Submit
-            </Button>
-          </form>
-        </Box>
+          </span>
+          API Data Settings
+        </Text>
+        <Text _hover={{ color: "orange" }} display={"flex"} gap="10px">
+          <span style={{ paddingTop: "5px" }}>
+            <RiAdminLine />
+          </span>
+          Admin Managment
+        </Text>
+        <Text _hover={{ color: "orange" }} display={"flex"} gap="10px">
+          <span style={{ paddingTop: "5px", marginLeft: "2px" }}>
+            <FiUserPlus />
+          </span>
+          Add Admins
+        </Text>
+        <Text _hover={{ color: "orange" }}>Logout</Text>
+      </Box>
+      <div style={{ display: "flex", flexDirection: "column",marginTop:"15px" }}>
+        <div>
+          <button onClick={onAdd} id="add">
+            Add New Product
+          </button>
+        </div>
+        <div id="div">
+          <table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Brand</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.map((row) => (
+                <tr key={row.id}>
+                  <td>{row.id}</td>
+                  <td>{row.brand}</td>
+                  <td>
+                    <img src={row.image} id="image" alt="" />
+                  </td>
+                  <td>
+                    ₹
+                    {new Intl.NumberFormat("en-IN", {
+                      maximumSignificantDigits: 3,
+                    }).format(row.price)}
+                  </td>
+                  <td>{row.category}</td>
+                  <td>
+                    <button
+                      id="edit"
+                      onClick={(e) => {
+                        onEdit();
+                        Aa(row.id);
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </td>
+                  <td>
+                    <button id="delete" onClick={(e) => Delete(row.id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <Modal isOpen={isAdd} onClose={onAddClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add New Product</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <form action="">
+              <input
+                type="text"
+                placeholder="Title"
+                required
+                onChange={(e) => {
+                  settitle(e.target.value);
+                }}
+              />
+              <input
+                type="text"
+                placeholder="Brand"
+                required
+                onChange={(e) => {
+                  setbrand(e.target.value);
+                }}
+              />
+              <input
+                type="url"
+                placeholder="Image"
+                required
+                onChange={(e) => {
+                  setimage(e.target.value);
+                }}
+              />
+              <input
+                type="number"
+                placeholder="Price"
+                required
+                onChange={(e) => {
+                  setprice(e.target.value);
+                }}
+              />
+              <input
+                type="text"
+                placeholder="Category"
+                required
+                onChange={(e) => {
+                  setcategory(e.target.value);
+                }}
+              />
+              <input type="submit" value="Submit" onClick={onadd} />
+            </form>
+          </ModalBody>
+        </ModalContent>
       </Modal>
-    </>
+      <Modal isOpen={isEdit} onClose={onEditClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Edit Product</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <form action="">
+              <input
+                type="text"
+                placeholder="Title"
+                required
+                value={etitle}
+                onChange={(e) => {
+                  setetitle(e.target.value);
+                }}
+              />
+              <input
+                type="text"
+                placeholder="Brand"
+                required
+                value={ebrand}
+                onChange={(e) => {
+                  setebrand(e.target.value);
+                }}
+              />
+              <input
+                type="url"
+                placeholder="Image"
+                required
+                value={eimage}
+                onChange={(e) => {
+                  seteimage(e.target.value);
+                }}
+              />
+              <input
+                type="number"
+                placeholder="Price"
+                required
+                value={eprice}
+                onChange={(e) => {
+                  seteprice(e.target.value);
+                }}
+              />
+              <input
+                type="text"
+                placeholder="Category"
+                required
+                value={ecategory}
+                onChange={(e) => {
+                  setecategory(e.target.value);
+                }}
+              />
+              <input type="submit" value="Edit" onClick={onedit} />
+            </form>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </div>
   );
 }
