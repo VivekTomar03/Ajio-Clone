@@ -1,70 +1,181 @@
-# Getting Started with Create React App
+import React from "react";
+import { Box, Card, Flex, Grid, Heading, Image, Text } from "@chakra-ui/react";
+import { AiOutlineHome } from "react-icons/ai";
+import { RiDatabase2Line, RiAdminLine } from "react-icons/ri";
+import { MdProductionQuantityLimits } from "react-icons/md";
+import { AiOutlineSetting, AiOutlineAppstore } from "react-icons/ai";
+import { FiUserPlus } from "react-icons/fi";
+import { HiOutlineArrowCircleRight } from "react-icons/hi";
+import { color } from "framer-motion";
+import {useNavigate} from "react-router-dom"
+const AdminPage = () => {
+ const navigate = useNavigate()
+  const handleEndPoint = (path, pointname)=> {
+      navigate(`/${path}`, {state:{endpoint:pointname}})
+  }
+   
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+  return (
+    <Box  width="100%" margin={"auto"} mt="0">
+    
+      <Flex gap={30} className="body" style={{ marginTop: "50px" }}>
+        <Box
+          className="leftPart"
+          bg={"gray"}
+          w="30%"
+          style={{
+            marginTop: "0",
+            paddingTop: "20px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "start",
+          }}
+        >
+          <Text _hover={{color:"orange" }} marginLeft={0} color={"white"}>
+            <AiOutlineHome /> Dashboard
+          </Text>
+          <Text _hover={{color:"orange" }}  marginLeft={30} color={"white"}>
+            <RiDatabase2Line /> Manage Order
+          </Text>
+          <Text _hover={{color:"orange" }}  marginLeft={30} color={"white"}>
+            <MdProductionQuantityLimits /> Manage Products
+          </Text>
+          <Text _hover={{color:"orange" }}  marginLeft={30} color={"white"}>
+            <AiOutlineSetting /> User Account Settings
+          </Text>
+          <Text _hover={{color:"orange" }}  marginLeft={30} color={"white"}>
+            <AiOutlineAppstore />
+            API Data Settings
+          </Text>
+          <Text _hover={{color:"orange" }}  marginLeft={30} color={"white"}>
+            <RiAdminLine /> Admin Managment
+          </Text>
+          <Text _hover={{color:"orange" }}  marginLeft={30} color={"white"}>
+            <FiUserPlus /> Add Admins
+          </Text>
+          <Text _hover={{color:"orange" }}  marginLeft={30} color={"white"}>
+            Logout
+          </Text>
+        </Box> 
+        <Box className="rightPart">
+         
+          <Grid marginRight={30} gap={25} gridTemplateColumns={"repeat(3,1fr)"}>
+            <Card
+              onClick={()=>handleEndPoint("users", "users")}
+              style={{
+                padding: "10px",
+                backgroundColor: "#150E56",
+                color: "white",
+              }}
+            >
+              <Flex justifyContent={"space-around"}>
+                <Heading>Count: 50</Heading>
+                <Image
+                  marginTop={10}
+                  w={80}
+                  h={80}
+                  src="https://www.citypng.com/public/uploads/small/11640168385jtmh7kpmvna5ddyynoxsjy5leb1nmpvqooaavkrjmt9zs7vtvuqi4lcwofkzsaejalxn7ggpim4hkg0wbwtzsrp1ldijzbdbsj5z.png"
+                  alt="user"
+                />
+              </Flex>
+              <Heading>Manage users </Heading>
+              
+            </Card>
 
-In the project directory, you can run:
+            <Card
+              onClick={()=>handleEndPoint("users", "mens")}
+              style={{
+                padding: "10px",
+                backgroundColor: "#57C5B6",
+                color: "white",
+              }}
+            >
+              <Flex justifyContent={"space-around"}>
+                <Heading>Count: 60</Heading>
+                <Image
+                  marginTop={10}
+                  w={80}
+                  h={80}
+                  src="https://cdn2.iconfinder.com/data/icons/user-23/512/User_Group.png"
+                  alt="user"
+                />
+              </Flex>
+              <Heading>Manage Mens Products</Heading>
+            </Card>
 
-### `npm start`
+            <Card
+              onClick={()=>handleEndPoint("users", "women")}
+              style={{
+                padding: "10px",
+                backgroundColor: "pink",
+                color: "white",
+               
+              }}
+            >
+              <Flex justifyContent={"space-around"}>
+                <Heading>Count: 70</Heading>
+                <Image
+                  marginTop={10}
+                  w={80}
+                  h={80}
+                  src="https://images.freeimages.com/fic/images/icons/747/network/256/user_group.png"
+                  alt="user"
+                />
+              </Flex>
+              <Heading>Manage Womens Products</Heading>
+            </Card>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+            <Card
+              // order function come here
+              style={{
+                padding: "30px",
+                backgroundColor: "#FF8B13",
+                color: "white",
+               
+              }}
+            >
+              <Flex justifyContent={"space-around"}>
+                <Heading>Count: 70</Heading>
+                <Image
+                  marginTop={10}
+                  w={150}
+                  h={80}
+                  src="https://www.pngmart.com/files/3/Order-Now-PNG-Free-Download.png"
+                  alt="user"
+                />
+              </Flex>
+              <Heading >Manage Orders</Heading>
+            </Card>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+            <Card
+              style={{
+                padding: "30px",
+                backgroundColor: "teal",
+                color: "white",
+                
+              }}
+            >
+              <Flex justifyContent={"space-around"}>
+                <Heading>
+                  Count: {Math.floor(Math.random() * 90000) + 100000}
+                </Heading>
+                <Image
+                  marginTop={10}
+                  w={90}
+                  h={80}
+                  src="https://cdn.w600.comps.canstockphoto.com/revenue-stock-illustration_csp29450467.jpg"
+                  alt="user"
+                />
+              </Flex>
+              <Heading>Total Revenue</Heading>
+            </Card>
+          </Grid>
+        </Box>
+      </Flex>
+    </Box>
+  );
+};
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+export default AdminPage;

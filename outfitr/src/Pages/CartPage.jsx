@@ -16,13 +16,13 @@ const CartPage = () => {
  const [cartdata , setcartData] = useState([inistate])  
   return (
     <Box mt={100}>
-       <Image src='https://assets.ajio.com/cms/AJIO/WEB/28032021-D-cartpagebanner-relianceones.jpg' alt='image1'/>
+       <Image margin={"auto"} src='https://assets.ajio.com/cms/AJIO/WEB/28032021-D-cartpagebanner-relianceones.jpg' alt='image1'/>
       <Box className='Body' w={"90%"} margin="auto" mt={40}>
           <Flex justifyContent={"space-between"}>
           <Text>My Bag(1 item)</Text>
           <Text>+ Add To Wishlist</Text>
           </Flex>
-         <Flex>
+         <Flex mt={4}>
              <Box className='Productdispaly' w={"75%"}>
                 {
                     cartdata && cartdata.map((el)=> {
@@ -32,14 +32,14 @@ const CartPage = () => {
                            
                           
                             <Text>{el.title}</Text>
-                            <Select placeholder='size' size={"10px"} mt="25px">
+                            <Select w={"fit-content"} placeholder='size' size={"10px"} >
                             <option value='option1'>30</option>
                             <option value='option2'>32</option>
                             <option value='option3'>36</option>
                             <option value='option3'>38</option>
                             <option value='option3'>42</option>
                             </Select>
-                            <Select placeholder='Qty' size={"10px"}  mt="25px">
+                            <Select w={"fit-content"} placeholder='Qty' size={"10px"}  >
                             <option value='option1'>1</option>
                             <option value='option2'>2</option>
                             <option value='option3'>3</option>
@@ -47,15 +47,15 @@ const CartPage = () => {
                             <option value='option3'>5</option>
                             </Select>
                             <Text>Price: {el.price}</Text>
-                            <Button color={"#179ED5"} ml={"30%"} w={"fit-content"} h="fit-content" mt={"25px"} bg="none" border={"none"}>Delete</Button>
-                             <Text color={"#179ED5"} mr={50}><AiOutlineHeart/> Add To WishList</Text>
+                            <Button color={"#179ED5"} ml={"25%"} w={"fit-content"} h="fit-content" mt={"25px"} bg="none" border={"none"}>Delete</Button>
+                            <Flex gap={2} mt={"25px"}> <Text mt={1} color={"#179ED5"}><AiOutlineHeart/> </Text>  <Text color={"#179ED5"} mr={50}>Add To WishList</Text></Flex>
                        </Grid>
                        </Flex>
                     })
                 }
                     
              </Box>
-             <Box w={"25%"}  className='CartTotal' >
+             <Box w={"25%"} border="1px solid red"  h={"300px"} className='CartTotal' >
                    <Box bg={"#FAFAFA"} w={"100%"}  className="order details">
                      <Text >Order Details</Text>
                       <Flex gap={150} justifyContent={"space-around"}>
