@@ -4,8 +4,10 @@ import Footer from "./Components/Footer";
 import { Hovermenu } from "./Components/Hovermenu";
 import NavbarBottom from "./Components/NavbarBottom";
 import NavbarTop from "./Components/NavbarTop";
-import Homepage from "./Pages/Homepage";
-import Register from "./Pages/Register";
+
+
+
+
 
 
 
@@ -27,7 +29,7 @@ function App() {
         <NavbarTop />
         <NavbarBottom />
       </Box>
-      <Homepage />
+     
       <Box style={{ cursor: "pointer" }} >
         <Image
           pb={{ base: "1rem", md: "1rem", lg: "1rem" }}
@@ -37,6 +39,7 @@ function App() {
         />
         <Footer />
       </Box>
+
     </Container>
   );
 }
