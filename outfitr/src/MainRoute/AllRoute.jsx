@@ -4,6 +4,7 @@ import Admin from '../Pages/Admin'
 import AdminPage from '../Pages/AdminPage'
 import CartPage from '../Pages/CartPage'
 import Homepage from '../Pages/Homepage'
+import Payment from '../Pages/Payment'
 import Productpage from '../Pages/productpage'
 import Register from '../Pages/Register'
 import SingleProductPage from '../Pages/SingleProductPage'
@@ -17,7 +18,7 @@ const AllRoute = () => {
        <Route path='/product' element={<Productpage/>}></Route>
        <Route path='/singleproducts/:id' element={<SingleProductPage/>}></Route>
        <Route path='/cartPage' element={<CartPage/>}></Route>
-       <Route path='/payment' element={""}></Route>
+       <Route path='/payment' element={<Payment/>}></Route>
        <Route path='/register' element={<Register/>}></Route>
        <Route path='/adminPage' element={<AdminPage/>}></Route>
        <Route path='/admin' element={<Admin/>}></Route>

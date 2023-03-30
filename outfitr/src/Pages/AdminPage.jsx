@@ -114,7 +114,7 @@ const AdminPage = () => {
             color={"white"}
             bg={"#57C5B6"}
             padding="20px"
-            onClick={() => handleEndPoint("users", "mens")}
+            onClick={() => handleEndPoint("admin", "mens")}
           >
             <Flex justifyContent={"space-around"}>
               <Text fontWeight={"bold"} fontSize={"25px"} mt={5}>
@@ -136,7 +136,7 @@ const AdminPage = () => {
             color={"white"}
             bg={"#2D5C7F"}
             padding="20px"
-            onClick={() => handleEndPoint("users", "women")}
+            onClick={() => handleEndPoint("admin", "women")}
           >
             <Flex justifyContent={"space-around"}>
               <Text fontWeight={"bold"} fontSize={"25px"} mt={5}>

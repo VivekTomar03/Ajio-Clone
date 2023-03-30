@@ -1,7 +1,7 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
 import React from "react";
 import Login from "../Pages/Login";
-
+import { Link } from "react-router-dom";
 const NavbarTop = () => {
   return (
     <Container maxW={"100%"}
@@ -27,6 +27,7 @@ const NavbarTop = () => {
         >
           Customer Care
         </Box>
+        <Link to={"/adminPage"}>
         <Box
           fontSize={".9rem"}
           fontFamily="monospace"
@@ -41,7 +42,7 @@ const NavbarTop = () => {
           cursor={"pointer"}
         >
           Visit AdminPage
-        </Box>
+        </Box></Link>
       </Flex>
     </Container>
   );
