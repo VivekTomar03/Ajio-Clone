@@ -15,26 +15,33 @@ import {
   Stack,
   Divider,
 } from "@chakra-ui/react";
-const ProductData = ({ val, isChecked ,brandname}) => {
+const ProductData = ({ val, isChecked ,brandname1}) => {
   // console.log(prop.Datachannel1)
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   // console.log(val)
   const getData = (price, order,brandname) => {
     setLoading(true);
+    
     axios
       .get(
         `https://embarrassed-fly-yoke.cyclic.app/${
           isChecked ? "mens" : "women"
-        }?${brandname ? `brand=${"JOMPERS"}` : null}&_sort=${
-          price ? price : null
-        }&_order=${order ? order : null}`
+        }?${
+          brandname1 == "JOMPERS" ||
+          brandname1 == "NETPLAY" ||
+          brandname1 == "PERFORMAX" ||
+          brandname1 == "EYEBOGLER"
+            ? `brand=${brandname1}`
+            : null
+        }&_sort=${price ? price : null}&_order=${order ? order : null}`
       )
       .then((res) => setData(res.data));
     setLoading(false);
+    // console.log(brandname1)
   };
   useEffect(() => {
-    // console.log(val);
+  console.log(brandname1)
     if (val == "revelence" || val == "") {
       getData();
     } else if (val == "pl") {
@@ -44,10 +51,11 @@ const ProductData = ({ val, isChecked ,brandname}) => {
     } else if (val == "d") {
       getData("discount", "asc");
       console.log(data);
-    }
     
+    }
    
-  }, [val, isChecked,brandname]);
+    // console.log(brandname1)
+  }, [val, isChecked,brandname1]);
 
   if (loading) {
     // console.log("loading");
@@ -67,7 +75,7 @@ const ProductData = ({ val, isChecked ,brandname}) => {
     );
   }
   return (
-    <Box id="griditem" spacing="40px">
+    <Box id="griditem" paddingLeft={"2px"} maxW={"100%"}>
       {data.map((e) => {
         {
           /* console.log(e); */
@@ -78,13 +86,15 @@ const ProductData = ({ val, isChecked ,brandname}) => {
             onClick={() => console.log(e.id)}
             textAlign={"center"}
             bg="white"
+            // border={"1px solid green"}
             marginBottom="20px"
             className="image-container"
-            gap="45"
-            width={"303px"}
-            height="445px"
+            gap="15"
+            width={"294.5px"}
+            maxW="500px"
+            height="470px"
           >
-            <div>
+            <div style={{ paddingBottom: "9px" }}>
               <Image src={e.image} width="100%" height={"380px"} />
               <Box className="text-overlay">
                 <Text color={"#2c4154"} fontSize="16px">
@@ -92,13 +102,28 @@ const ProductData = ({ val, isChecked ,brandname}) => {
                 </Text>
               </Box>
             </div>
-            <Text className="image-text" fontSize={"13px"} color="#d5a249">
+            <Text
+              className="image-text"
+              fontSize={"13px"}
+              paddingBottom="4px"
+              color="#d5a249"
+            >
               {e.brand}
             </Text>
-            <Text className="image-text" color={"#333333"} fontSize="13px">
+            <Text
+              className="image-text"
+              color={"#333333"}
+              paddingBottom="2px"
+              fontSize="13px"
+            >
               {e.title}
             </Text>
-            <Text className="image-text" fontSize={"14px"} color="#333333">
+            <Text
+              className="image-text"
+              paddingBottom={"4px"}
+              fontSize={"14px"}
+              color="#333333"
+            >
               ₹{e.price}
             </Text>
             <Text className="image-text" color={"#3ab649"} fontSize="12px">
