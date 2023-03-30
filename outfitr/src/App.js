@@ -38,7 +38,6 @@ function App() {
         <Footer />
       </Box>
     </Container>
-
   );
 }
 
