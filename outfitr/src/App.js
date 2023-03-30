@@ -22,10 +22,10 @@ function App() {
         <NavbarTop />
         <NavbarBottom />
       </Box>
-      <Homepage/>
+      {/* <Homepage/> */}
       <Admin/>
-      <AdminPage/>
-      <Payment/>
+      {/* <AdminPage/> */}
+      {/* <Payment/> */}
     </Container>
 
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Admin.css";
+import { useNavigate } from 'react-router-dom'
 import {
   Modal,
   ModalOverlay,
@@ -27,6 +28,7 @@ import { FiUserPlus } from "react-icons/fi";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 export default function Admin() {
+  const navigate=useNavigate()
   const { isOpen: isAdd, onOpen: onAdd, onClose: onAddClose } = useDisclosure();
   const {
     isOpen: isEdit,
@@ -39,7 +41,7 @@ export default function Admin() {
   const [category, setcategory] = useState();
   const [brand, setbrand] = useState();
   const [image, setimage] = useState();
-  const [edit, setedit] = useState();
+  const [url, seturl] = useState(`https://embarrassed-fly-yoke.cyclic.app/women`);
   const [etitle, setetitle] = useState();
   const [eprice, seteprice] = useState();
   const [ecategory, setecategory] = useState();
@@ -47,7 +49,7 @@ export default function Admin() {
   const [eimage, seteimage] = useState();
   const [eid, seteid] = useState();
   useEffect(() => {
-    fetch("https://embarrassed-fly-yoke.cyclic.app/women")
+    fetch(`${url}`)
       .then((res) => res.json())
       .then((data) => setdata(data.reverse()));
   }, []);
@@ -64,15 +66,16 @@ export default function Admin() {
       discount,
       offer_price,
     };
-    fetch(`https://embarrassed-fly-yoke.cyclic.app/women`, {
+    fetch(`${url}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(obj),
     });
+    // navigate("/admin")
   };
 
   const Aa = (e) => {
-    fetch(`https://embarrassed-fly-yoke.cyclic.app/women/${e}`)
+    fetch(`${url}/${e}`)
       .then((res) => res.json())
       .then((data) => {
         setetitle(data.title);
@@ -93,11 +96,12 @@ export default function Admin() {
       image: eimage,
     };
     console.log(obj);
-    fetch(`https://embarrassed-fly-yoke.cyclic.app/women/${eid}`, {
+    fetch(`${url}/${eid}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(obj),
     });
+    // navigate("/admin")
   };
   const Delete = (e) => {
     confirmAlert({
@@ -111,10 +115,11 @@ export default function Admin() {
             <button
               id="yes"
               onClick={() => {
-                fetch(`https://embarrassed-fly-yoke.cyclic.app/women/${e}`, {
+                fetch(`${url}/${e}`, {
                   method: "DELETE",
                 });
                 onClose();
+                // navigate("/admin")
               }}
             >
               Yes, Delete it!
@@ -124,11 +129,6 @@ export default function Admin() {
       },
     });
   };
-  // const Delete=(e)=>{
-  //   fetch(`https://embarrassed-fly-yoke.cyclic.app/women/${e}`,{
-  //     method:"DELETE"
-  // })
-  // }
   return (
     <div className="main">
       <Box className="LeftPart">
