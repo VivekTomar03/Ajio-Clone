@@ -8,7 +8,7 @@ import {
   Heading,
   Center,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Pages/AdminPage.css";
 import { AiOutlineHome } from "react-icons/ai";
 import { RiDatabase2Line, RiAdminLine } from "react-icons/ri";
@@ -16,12 +16,22 @@ import { MdProductionQuantityLimits } from "react-icons/md";
 import { AiOutlineSetting, AiOutlineAppstore } from "react-icons/ai";
 import { FiUserPlus } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { getmensData, getuserData, getWomensData } from "../Api/AdminPageApi";
 
 const AdminPage = () => {
+  const [usercount , setusercount] = useState(1)
+  const [mensdata, setmensdata] = useState(1)
+  const[womensdata, setwomensdata] = useState(1)
   const navigate = useNavigate();
   const handleEndPoint = (path, pointname) => {
     navigate(`/${path}`, { state: { endpoint: pointname } });
   };
+ 
+   useEffect(() => {
+      getuserData().then((res) => setusercount(res.data.length))
+       getmensData().then((res) => setmensdata(res.data.length))
+       getWomensData().then((res) => setwomensdata(res.data.length))
+   },[])
 
   return (
     <Box className="main">
@@ -86,7 +96,7 @@ const AdminPage = () => {
           >
             <Flex justifyContent={"space-around"}>
               <Text fontWeight={"bold"} fontSize={"25px"} mt={5}>
-                Count :10
+                Count :{usercount}
               </Text>
               <Image
                 w={"100px"}
@@ -108,7 +118,7 @@ const AdminPage = () => {
           >
             <Flex justifyContent={"space-around"}>
               <Text fontWeight={"bold"} fontSize={"25px"} mt={5}>
-                Count :50
+                Count :{mensdata}
               </Text>
               <Image
                 w={"100px"}
@@ -130,18 +140,18 @@ const AdminPage = () => {
           >
             <Flex justifyContent={"space-around"}>
               <Text fontWeight={"bold"} fontSize={"25px"} mt={5}>
-                Count :50
+                Count :{womensdata}
               </Text>
               <Image
                 w={"100px"}
                 src="https://images.freeimages.com/fic/images/icons/747/network/256/user_group.png"
               />
             </Flex>
-            <Center p={5}>
-              <Text fontWeight={"bold"} fontSize={"32px"}>
+            
+              <Text mt={5} fontWeight={"bold"} fontSize={"32px"}>
                 Manage Women Products{" "}
               </Text>
-            </Center>
+           
           </Card>
 
           <Card
@@ -162,7 +172,7 @@ const AdminPage = () => {
             </Flex>
             <Center p={5}>
               <Text fontWeight={"bold"} fontSize={"32px"}>
-                Manage users{" "}
+                Manage order{" "}
               </Text>
             </Center>
           </Card>
