@@ -28,8 +28,10 @@ import { AiOutlineSetting, AiOutlineAppstore } from "react-icons/ai";
 import { FiUserPlus } from "react-icons/fi";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { getData } from "../Api/AdminPageApi";
 export default function Admin() {
   const location = useLocation();
+  let nav=useNavigate()
   const end=(location.state.endpoint)
   const { isOpen: isAdd, onOpen: onAdd, onClose: onAddClose } = useDisclosure();
   const {
@@ -43,7 +45,7 @@ export default function Admin() {
   const [category, setcategory] = useState();
   const [brand, setbrand] = useState();
   const [image, setimage] = useState();
-  const [url, seturl] = useState(`https://embarrassed-fly-yoke.cyclic.app/${end}`);
+  const [url, seturl] = useState(`https://artistic-butternut-blossom.glitch.me/${end}`);
   const [etitle, setetitle] = useState();
   const [eprice, seteprice] = useState();
   const [ecategory, setecategory] = useState();
@@ -56,7 +58,7 @@ export default function Admin() {
       .then((res) => res.json())
       .then((data) => setdata(data.reverse()));
     setloader(false)
-  });
+  })
   const onadd = (e) => {
     e.preventDefault()
     let discount = Math.floor(Math.random() * (50 - 20)) + 20;
@@ -98,12 +100,11 @@ export default function Admin() {
       brand: ebrand,
       image: eimage,
     };
-    console.log(obj);
     fetch(`${url}/${eid}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(obj),
-    });
+    })
     onEditClose()
   };
   const Delete = (e) => {
@@ -120,7 +121,7 @@ export default function Admin() {
               onClick={() => {
                 fetch(`${url}/${e}`, {
                   method: "DELETE",
-                });
+                })
                 onClose();
               }}
             >
@@ -189,7 +190,7 @@ export default function Admin() {
   size='xl'
   m='auto'
 />:
-      <div style={{ display: "flex", flexDirection: "column",paddingTop:"15px",margin:"auto" }}>
+      <div style={{ display: "flex", flexDirection: "column",padding:"15px",margin:"auto" }}>
         <div>
           <button onClick={onAdd} id="add">
             Add New Product
