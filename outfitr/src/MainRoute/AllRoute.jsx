@@ -8,13 +8,15 @@ import Payment from '../Pages/Payment'
 import Productpage from '../Pages/productpage'
 import Register from '../Pages/Register'
 import SingleProductPage from '../Pages/SingleProductPage'
+import Productpagef from '../Pages/productpagef'
+import MensHomepage from '../Pages/MensHomepage'
 
 const AllRoute = () => {
   return (
     <Routes>
        <Route path='/' element={<Homepage/>}></Route>
-       <Route path='/mensProduct' element={""}></Route>
-       <Route path='/womensProduct' element={""}></Route>
+       <Route path='/mensProduct' element={<MensHomepage/>}></Route>
+       {/* <Route path='/womensProduct' element={<Productpage/>}></Route> */}
        <Route path='/product' element={<Productpage/>}></Route>
        <Route path='/singleproducts/:id' element={<SingleProductPage/>}></Route>
        <Route path='/cartPage' element={<CartPage/>}></Route>

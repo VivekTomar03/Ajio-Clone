@@ -14,27 +14,27 @@ import {
 import "./product.css";
 import Datacount from "./prductfetch";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import ProductData from "./prductfetch";
-const Productpage = () => {
-  const [isChecked, setIsChecked] = useState(true);
+import ProductDataf from "./prductfetch";
+const Productpagef = () => {
+  const [isChecked, setIsChecked] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
   const [val1, setVal1] = useState("");
   const [lowh, setLowh] = useState(false);
   const [val, setVal] = useState("");
-// const [dis,setDis]=useState("");
+  // const [dis,setDis]=useState("");
   const [toggle, setToggle] = useState(false);
   const [brand1, setBrand1] = useState(false);
   const [brand2, setBrand2] = useState(false);
   const [brand3, setBrand3] = useState(false);
   const [brand4, setBrand4] = useState(false);
-  const [cat,setCat]=useState(false)
-  const [catval,setCatval]=useState("")
-   const [cat1, setCat1] = useState(false);
-   const [cat2, setCat2] = useState(false);
-   const [cat3, setCat3] = useState(false);
-   const [cat4, setCat4] = useState(false);
+  const [cat, setCat] = useState(false);
+  const [catval, setCatval] = useState("");
+  const [cat1, setCat1] = useState(false);
+  const [cat2, setCat2] = useState(false);
+  const [cat3, setCat3] = useState(false);
+  const [cat4, setCat4] = useState(false);
   const cat11 = () => {
-    setCat(true)
+    setCat(true);
     setCat1(true);
     setCat2(false);
     setCat3(false);
@@ -43,33 +43,34 @@ const Productpage = () => {
     if (cat1 == true) {
       setCatval(true);
     } else {
-      if(isChecked){setCatval("kurta")}else{setCatval("Kurtis");}
+      if (isChecked) {
+        setCatval("kurta");
+      } else {
+        setCatval("Kurtis");
+      }
     }
     // console.log(catval)
-   
   };
   const cat22 = () => {
-     setCat(true);
-     setCat1(false);
-     setCat2(true);
-     setCat3(false);
-     setCat4(false);
-     setCat2(!cat2);
-     if (cat2 == true) {
-       setCatval(true);
-     } else {
-      if(isChecked){
-
+    setCat(true);
+    setCat1(false);
+    setCat2(true);
+    setCat3(false);
+    setCat4(false);
+    setCat2(!cat2);
+    if (cat2 == true) {
+      setCatval(true);
+    } else {
+      if (isChecked) {
         setCatval("T-shirt");
-      }else{
-        setCatval("Sarees")
+      } else {
+        setCatval("Sarees");
       }
-     }
-   
+    }
   };
 
   const cat33 = () => {
-     setCat(true);
+    setCat(true);
     setCat1(false);
     setCat2(false);
     setCat3(true);
@@ -78,58 +79,53 @@ const Productpage = () => {
     if (cat3 == true) {
       setCatval(true);
     } else {
-      if(isChecked){
-
+      if (isChecked) {
         setCatval("shirt");
-      }else{
-        setCatval("Heels")
+      } else {
+        setCatval("Heels");
       }
     }
-   
   };
   const cat44 = () => {
-     setCat(true);
-     setCat1(false);
-     setCat2(false);
-     setCat3(false);
-     setCat4(true);
-     setCat4(!cat4);
-     if (cat4 == true) {
-       setCatval(true);
-     } else {
-      if(isChecked){
-
+    setCat(true);
+    setCat1(false);
+    setCat2(false);
+    setCat3(false);
+    setCat4(true);
+    setCat4(!cat4);
+    if (cat4 == true) {
+      setCatval(true);
+    } else {
+      if (isChecked) {
         setCatval("Pants");
-      }else{
-        setCatval("Earrings")
+      } else {
+        setCatval("Earrings");
       }
-     }
-   
+    }
   };
   const Datachannel1 = (val1) => {
     setVal(val1);
   };
   const brand11 = (e) => {
-    setCat(false)
+    setCat(false);
     setBrand1(true);
     setBrand2(false);
     setBrand3(false);
     setBrand4(false);
-    setBrand1(!brand1)
-    if(brand1==true){
-      setLowh(true)
-    }else{
+    setBrand1(!brand1);
+    if (brand1 == true) {
+      setLowh(true);
+    } else {
       if (isChecked) {
         setLowh("JOMPERS");
       } else {
         setLowh("PRAKHYA");
       }
-      
     }
     console.log(brand1);
   };
   const brand22 = () => {
-     setCat(false);
+    setCat(false);
     setBrand1(false);
     setBrand2(true);
     setBrand3(false);
@@ -138,17 +134,16 @@ const Productpage = () => {
     if (brand2 == true) {
       setLowh(true);
     } else {
-      if(isChecked){
-
+      if (isChecked) {
         setLowh("NETPLAY");
-      }else{
-        setLowh("Siril")
+      } else {
+        setLowh("Siril");
       }
     }
   };
 
   const brand33 = () => {
-     setCat(false);
+    setCat(false);
     setBrand1(false);
     setBrand2(false);
     setBrand3(true);
@@ -157,16 +152,15 @@ const Productpage = () => {
     if (brand3 == true) {
       setLowh(true);
     } else {
-      if(isChecked){
-
+      if (isChecked) {
         setLowh("PERFORMAX");
-      }else{
-        setLowh("Curiozz")
+      } else {
+        setLowh("Curiozz");
       }
     }
   };
   const brand44 = () => {
-     setCat(false);
+    setCat(false);
     setBrand1(false);
     setBrand2(false);
     setBrand3(false);
@@ -175,11 +169,10 @@ const Productpage = () => {
     if (brand4 == true) {
       setLowh(true);
     } else {
-      if(isChecked){
-
+      if (isChecked) {
         setLowh("EYEBOGLER");
-      }else{
-        setLowh("ZIKARAA")
+      } else {
+        setLowh("ZIKARAA");
       }
     }
   };
@@ -698,7 +691,7 @@ const Productpage = () => {
             margin="auto"
           >
             <Box color={"black"} fontWeight={"bold"}>
-              {isChecked?"60":"70"} items found
+             {isChecked? "60":"70"} items found
             </Box>
             <Box
               onClick={() => {
@@ -739,7 +732,7 @@ const Productpage = () => {
             </Box>
           </Box>
           <hr />
-          <ProductData
+          <ProductDataf
             val={val}
             brandname1={lowh}
             isChecked={isChecked}
@@ -753,4 +746,4 @@ const Productpage = () => {
   );
 };
 
-export default Productpage;
+export default Productpagef;

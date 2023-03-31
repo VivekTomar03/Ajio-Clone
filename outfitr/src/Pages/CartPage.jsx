@@ -1,6 +1,8 @@
 import {
   Box,
   Button,
+  Center,
+  Container,
   Flex,
   Grid,
   Image,
@@ -8,46 +10,85 @@ import {
   Select,
   Text,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useSelector } from "react-redux";
-import { getcartData } from "../Api/CartPageapi";
-const inistate = {
-  image:
-    "https://assets.ajio.com/medias/sys_master/root/20220927/pNT8/6332df42aeb269dbb3aa32c0/performax_jet_black_fastdry_active_essential_track_pants.jpg",
-  brand: "PERFORMAX",
-  title: "Fastdry Active Essential Track Pants",
-  price: 419,
-  discount: 30,
-  offer_price: 300,
-  id: 1,
-  category: "Pants",
-};
+import {  useNavigate } from "react-router-dom";
+
+
+ 
 const CartPage = () => {
   const {userData} = useSelector((state) => state.authReducer)
   const [cartdata, setcartData] = useState([]);
-  // console.log(userData);
+  const navigate = useNavigate()
+  const [price , setprice] = useState(0)
+  const [qty , setqty] = useState(1)
+
+  
+  console.log(userData.cart, "from cart Page");
    useEffect(() => {
-    setcartData(userData.cart)
-   },[])
+     if(userData.cart){
+      setcartData(userData.cart)
+     }
+      ordertotal() 
+  
+   },[userData.cart,qty])
+  
+     const ordertotal = () => {
+     
+      userData.cart && cartdata.map((el) => {
+           if(qty==0){
+            setprice(el.price)
+           }
+           else{
+            setprice(el.price*qty)
+           }
+       })
+        
+     }
+    
+// let object = {...userData}
+  const orderPlaced = (id, obj)=> {
+    axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${id}` ,obj)
+     .then((res) => {
+       console.log(res);
+       navigate("/")
+     })
+     .catch((err) => console.log(err))
+    //  console.log(userData, "from cart Page");
+    
+}
    
+const handledelete = (id) => {
+console.log(id);
+ const filterdata = cartdata?.filter((el) => el.id!=id)
+
+ axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}` ,{cart:filterdata})
+ .then((res) => {
+   console.log(res);
+  //  navigate("/")
+ })
+ .catch((err) => console.log(err))
+}
+      
   return (
-    <Box mt={100}>
+    <Box mt={10}>
       <Image
         margin={"auto"}
         src="https://assets.ajio.com/cms/AJIO/WEB/28032021-D-cartpagebanner-relianceones.jpg"
         alt="image1"
       />
-     { cartdata ? <Box className="Body" w={"90%"} margin="auto" mt={40}>
+     { userData.cart.length? <Box className="Body" w={"90%"} margin="auto" mt={10} >
         <Flex justifyContent={"space-between"}>
           <Text>My Bag(1 item)</Text>
           <Text>+ Add To Wishlist</Text>
         </Flex>
         <Flex mt={4}>
-          <Box className="Productdispaly" w={"75%"}>
-            {cartdata &&
-              cartdata.map((el) => {
+          <Box marginBottom={80} className="Productdispaly" w={"75%"}>
+            {
+              cartdata?.map((el) => {
                 return (
                   <Flex>
                     <Image
@@ -58,9 +99,11 @@ const CartPage = () => {
                     />
                     <Grid ml={5} templateColumns="repeat(4, 1fr)">
                       <Text>{el.title}</Text>
-                      <Select
+                       <Flex gap={1}>
+                        Size
+                       <Select
                         w={"fit-content"}
-                        placeholder="size"
+                        placeholder="30"
                         size={"10px"}
                       >
                         <option value="option1">30</option>
@@ -69,15 +112,21 @@ const CartPage = () => {
                         <option value="option3">38</option>
                         <option value="option3">42</option>
                       </Select>
-                      <Select w={"fit-content"} placeholder="Qty" size={"10px"}>
-                        <option value="option1">1</option>
-                        <option value="option2">2</option>
-                        <option value="option3">3</option>
-                        <option value="option3">4</option>
-                        <option value="option3">5</option>
+                       </Flex>
+                     <Flex gap={1}>
+                       QTY
+                     <Select onChange={(e) => setqty(+e.target.value)} w={"fit-content"} placeholder={(userData.cart.length)} size={"10px"}>
+                        
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                       </Select>
+                     </Flex>
+                      
                       <Text>Price: {el.price}</Text>
                       <Button
+                       onClick={()=>handledelete(el.id)}
                         color={"#179ED5"}
                         ml={"25%"}
                         w={"fit-content"}
@@ -112,11 +161,11 @@ const CartPage = () => {
               <Text fontWeight={"bold"}>Order Details</Text>
               <Flex gap={150} justifyContent={"space-around"}>
                 <Text fontSize={"15px"}>Bag Total</Text>
-                <Text fontSize={"15px"}>200</Text>
+                <Text fontSize={"15px"}>{price}</Text>
               </Flex>
               <Flex gap={120} justifyContent={"space-around"}>
                 <Text fontSize={"15px"}>Bag Discount</Text>
-                <Text fontSize={"15px"}>20100</Text>
+                <Text fontSize={"15px"}>10%</Text>
               </Flex>
               <Flex gap={120} justifyContent={"space-around"}>
                 <Text fontSize={"15px"}>Delivery Fee</Text>
@@ -124,7 +173,7 @@ const CartPage = () => {
               </Flex>
               <Flex gap={120} justifyContent={"space-around"}>
                 <Text fontSize={"15px"}>Order Total</Text>
-                <Text fontSize={"15px"}>Free</Text>
+                <Text fontSize={"15px"}>{Math.floor(price/10)*9}</Text>
               </Flex>
               <Button
                 _hover={{ backgroundColor: "#D5A249" }}
@@ -133,13 +182,15 @@ const CartPage = () => {
                 bg={"#D5A249"}
                 w={"100%"}
                 h="50px"
+
+                onClick={()=>orderPlaced(2, {cart:[1234]})}
               >
                 Place Order
               </Button>
             </Flex>
             <Box mt={5}>
               <Text fontWeight={"bold"}>Apply Coupon</Text>
-              <Input h={35} padding="10px" placeholder="enter coupoun code" />
+              <Input h={35} padding="10px" placeholder="enter coupoun code"  />
               <Button
                 _hover={{ backgroundColor: "#D5A249" }}
                 border={"none"}
@@ -154,7 +205,16 @@ const CartPage = () => {
             </Box>
           </Box>
         </Flex>
-      </Box> : <Text>Empty cart</Text>}
+      </Box> :
+        <Container>
+          <Center > 
+           
+             <Image  src="https://cdn.dribbble.com/users/324185/screenshots/15805709/media/98798b7662d8a4b21cb66ad4bd430b48.jpg?compress=1&resize=800x600&vertical=top" alt="empty"/>
+            </Center>
+          <Center mt={5}> <Button onClick={() => navigate("/")} _hover={{backgroundColor:"orange.100"}} bg={"orange"} w={"80%"}>Back To Home</Button></Center>
+        </Container>
+        
+      }
     </Box>
   );
 };

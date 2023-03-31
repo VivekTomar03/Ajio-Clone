@@ -29,8 +29,10 @@ import { BsDiscord, BsPerson } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
 import { FcUnlock } from "react-icons/fc";
 import { useRef } from "react";
-
+import { useDispatch } from "react-redux";
+import { postReqUser } from "../Redux/Authreducer/action";
 export default function Register() {
+  const dispatch = useDispatch()
   let toast = useToast();
 
   let name = useRef();
@@ -40,12 +42,26 @@ export default function Register() {
   function handleSubmit(e) {
     e.preventDefault();
     const data = {
-      username: name.current.value,
+      name: name.current.value,
       email: email.current.value,
       password: password.current.value,
+      age:20,
+      cart:[
+        {
+          image:
+            "https://assets.ajio.com/medias/sys_master/root/20220927/pNT8/6332df42aeb269dbb3aa32c0/performax_jet_black_fastdry_active_essential_track_pants.jpg",
+          brand: "PERFORMAX",
+          title: "Fastdry Active Essential Track Pants",
+          price: 419,
+          discount: 30,
+          offer_price: 300,
+          id: 1,
+          category: "Pants",
+        }
+      ]
     };
-    console.log(data);
-
+  
+      dispatch(postReqUser(data))
     //   async function postUserData() {
     //     const response = await fetch(
     //       `https://frequent-ionized-grapple.glitch.me/user`,
@@ -199,7 +215,7 @@ export default function Register() {
                             pointerEvents="none"
                             children={<BsPerson color="gray.800" />}
                           />
-                          <Input ref={name} type="text" size="md" />
+                          <Input isRequired={true} ref={name} type="text" size="md" />
                         </InputGroup>
                       </FormControl>
 
