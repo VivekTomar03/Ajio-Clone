@@ -15,33 +15,88 @@ import {
   Stack,
   Divider,
 } from "@chakra-ui/react";
-const ProductData = ({ val, isChecked ,brandname1}) => {
+import { useNavigate } from "react-router-dom";
+const ProductData = ({ val, isChecked, brandname1, toggle,cat,catval }) => {
   // console.log(prop.Datachannel1)
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [datac, setDatac] = useState(60);
   // console.log(val)
-  const getData = (price, order,brandname) => {
-    setLoading(true);
+  const getData = (price, order, brandname) => {
     
-    axios
-      .get(
-        `https://embarrassed-fly-yoke.cyclic.app/${
-          isChecked ? "mens" : "women"
-        }?${
-          brandname1 == "JOMPERS" ||
-          brandname1 == "NETPLAY" ||
-          brandname1 == "PERFORMAX" ||
-          brandname1 == "EYEBOGLER"
-            ? `brand=${brandname1}`
-            : null
-        }&_sort=${price ? price : null}&_order=${order ? order : null}`
-      )
-      .then((res) => setData(res.data));
+    setLoading(true);
+    if(cat==true){
+if (catval == true || catval == false) {
+  axios
+    .get(
+      `https://embarrassed-fly-yoke.cyclic.app/${
+        isChecked ? "mens" : "women"
+      }?_sort=${price ? price : ""}&_order=${order ? order : ""}`
+    )
+    .then((res) => {
+      setData(res.data);
+      setDatac(res.data.length);
+    });
+  // console.log(data);
+} else {
+  axios
+     .get(
+    `https://embarrassed-fly-yoke.cyclic.app/${
+      isChecked ? "mens" : "women"
+    }${
+      catval !== true && catval !== false
+        ? `?category=${catval}&_sort=${price ? price : ""}&_order=${
+            order ? order : ""
+          }`
+        : `?_sort=${price ? price : ""}&_order=${order ? order : ""}`
+    }`
+  )
+     .then((res) => {
+      console.log("catcomp")
+       setData(res.data);
+       setDatac(res.data.length);
+     });
+}
+    }else{
+
+    
+if (brandname1 == true || brandname1 == false) {
+  axios
+    .get(
+      `https://embarrassed-fly-yoke.cyclic.app/${
+        isChecked ? "mens" : "women"
+      }?_sort=${price ? price : ""}&_order=${order ? order : ""}`
+    )
+    .then((res) => {
+      setData(res.data);
+      setDatac(res.data.length);
+    }); 
+    // console.log(data)
+} else {
+  axios
+    .get(
+      `https://embarrassed-fly-yoke.cyclic.app/${isChecked ? "mens" : "women"}${
+        brandname1 !== "true" && brandname1 !== false
+          ? `?brand=${brandname1}&_sort=${price ? price : ""}&_order=${
+              order ? order : ""
+            }`
+          : `?_sort=${price ? price : ""}&_order=${order ? order : ""}`
+      }`
+    )
+    .then((res) => {
+      setData(res.data);
+      setDatac(res.data.length);
+    });
+}}
     setLoading(false);
-    // console.log(brandname1)
   };
+  const Getdc = () => {
+    return useNavigate({ data: datac });
+  };
+
   useEffect(() => {
-  console.log(brandname1)
+    // Getdc()
+    // console.log(catval);
     if (val == "revelence" || val == "") {
       getData();
     } else if (val == "pl") {
@@ -50,12 +105,9 @@ const ProductData = ({ val, isChecked ,brandname1}) => {
       getData("price", "desc");
     } else if (val == "d") {
       getData("discount", "asc");
-      console.log(data);
-    
     }
-   
-    // console.log(brandname1)
-  }, [val, isChecked,brandname1]);
+    // console.log(datac);
+  }, [val, isChecked, brandname1, toggle, datac,cat,catval]);
 
   if (loading) {
     // console.log("loading");
@@ -75,7 +127,14 @@ const ProductData = ({ val, isChecked ,brandname1}) => {
     );
   }
   return (
-    <Box id="griditem" paddingLeft={"2px"} maxW={"100%"}>
+    <Box
+      display="grid"
+      gridTemplateColumns={toggle ? "repeat(6, 1fr)" : "repeat(3, 1fr)"}
+      id="griditem"
+      gap={toggle ? "5px" : "25px"}
+      paddingLeft={"2px"}
+      maxW={"100%"}
+    >
       {data.map((e) => {
         {
           /* console.log(e); */
@@ -90,18 +149,17 @@ const ProductData = ({ val, isChecked ,brandname1}) => {
             marginBottom="20px"
             className="image-container"
             gap="15"
-            width={"294.5px"}
-            maxW="500px"
+            // maxW="500px"
             height="470px"
           >
-            <div style={{ paddingBottom: "9px" }}>
+            <Box style={{ paddingBottom: "9px" }}>
               <Image src={e.image} width="100%" height={"380px"} />
               <Box className="text-overlay">
                 <Text color={"#2c4154"} fontSize="16px">
                   Quick View
                 </Text>
               </Box>
-            </div>
+            </Box>
             <Text
               className="image-text"
               fontSize={"13px"}
