@@ -61,7 +61,17 @@ const CartPage = () => {
     
 }
    
+const handledelete = (id) => {
+console.log(id);
+ const filterdata = cartdata?.filter((el) => el.id!=id)
 
+ axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}` ,{cart:filterdata})
+ .then((res) => {
+   console.log(res);
+  //  navigate("/")
+ })
+ .catch((err) => console.log(err))
+}
       
   return (
     <Box mt={10}>
@@ -70,7 +80,7 @@ const CartPage = () => {
         src="https://assets.ajio.com/cms/AJIO/WEB/28032021-D-cartpagebanner-relianceones.jpg"
         alt="image1"
       />
-     { userData.cart? <Box className="Body" w={"90%"} margin="auto" mt={10} >
+     { userData.cart.length? <Box className="Body" w={"90%"} margin="auto" mt={10} >
         <Flex justifyContent={"space-between"}>
           <Text>My Bag(1 item)</Text>
           <Text>+ Add To Wishlist</Text>
@@ -116,6 +126,7 @@ const CartPage = () => {
                       
                       <Text>Price: {el.price}</Text>
                       <Button
+                       onClick={()=>handledelete(el.id)}
                         color={"#179ED5"}
                         ml={"25%"}
                         w={"fit-content"}
