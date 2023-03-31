@@ -5,11 +5,15 @@ import { Hovermenu } from "./Components/Hovermenu";
 import NavbarBottom from "./Components/NavbarBottom";
 import NavbarTop from "./Components/NavbarTop";
 import AllRoute from "./MainRoute/AllRoute";
+import { useLocation } from "react-router-dom";
 
 
 
 function App() {
+  let location=useLocation()
   return (
+    <>
+    {location.pathname!=="/payment"?
   <Container maxW={"100%"} p={0} m={0}>
       <Box
         bgColor={"rgb(255, 255, 255)"}
@@ -18,7 +22,7 @@ function App() {
         left="0"
         mt="-.9rem"
         position="sticky"
-        zIndex="100"
+        zIndex="10"
         boxShadow={"0px 0px 10px 0px rgba(0,0,0,0.75)"}
       >
         <NavbarTop />
@@ -35,7 +39,9 @@ function App() {
         <Footer />
       </Box>
 
-    </Container>
+    </Container>:
+    <AllRoute/>}
+    </>
   );
 }
 
