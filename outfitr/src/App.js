@@ -7,6 +7,7 @@ import NavbarTop from "./Components/NavbarTop";
 import AllRoute from "./MainRoute/AllRoute";
 import MensHomepage from "./Pages/MensHomepage";
 import Productpage from "./Pages/productpage";
+import SingleProductPage from "./Pages/SingleProductPage";
 
 
 
@@ -41,7 +42,7 @@ function App() {
        
     </Container>
  
- 
+  
   );
 }
 
