@@ -25,7 +25,7 @@ const ProductData = ({ val, isChecked ,brandname1}) => {
     
     axios
       .get(
-        `https://embarrassed-fly-yoke.cyclic.app/${
+        `https://artistic-butternut-blossom.glitch.me/${
           isChecked ? "mens" : "women"
         }?${
           brandname1 == "JOMPERS" ||
