@@ -37,7 +37,14 @@ const SizeDrawer = ({ brand, image }) => {
     const btnRef = React.useRef()
     return (
         <>
-            <Button ref={btnRef} border="none" bgColor={"white"} size="xs" textColor="blue" onClick={onOpen}>
+            <Button ref={btnRef} border="none" bgColor={"white"} size="xs" textColor="blue" onClick={onOpen}
+              _hover={{  }}
+              _active={{
+                
+               
+              }}
+        
+              >
                 check size chart
             </Button>
             <Drawer

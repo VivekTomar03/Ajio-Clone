@@ -5,6 +5,9 @@ import { Hovermenu } from "./Components/Hovermenu";
 import NavbarBottom from "./Components/NavbarBottom";
 import NavbarTop from "./Components/NavbarTop";
 import AllRoute from "./MainRoute/AllRoute";
+import MensHomepage from "./Pages/MensHomepage";
+import Productpage from "./Pages/productpage";
+
 
 
 
@@ -35,9 +38,10 @@ function App() {
         />
         <Footer />
       </Box>
-
+       
     </Container>
-  
+ 
+ 
   );
 }
 
