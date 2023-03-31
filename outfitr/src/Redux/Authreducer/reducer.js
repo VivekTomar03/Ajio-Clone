@@ -5,7 +5,7 @@ import { GETUSERLOGIN, GETUSERLOGINFAIL, GETUSERLOGINSUCCESS, POSTREQFAIL, POSTR
 const initstate = {
     isLoading:false,
     isError:false,
-    userData:{}
+    userData:[]
 }
 
 export const  reducer = (state=initstate, {type,payload}) => {
