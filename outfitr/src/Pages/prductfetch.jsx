@@ -18,6 +18,7 @@ import {
 import { useNavigate } from "react-router-dom";
 const ProductData = ({ val, isChecked, brandname1, toggle,cat,catval }) => {
   // console.log(prop.Datachannel1)
+  const navigate=useNavigate()
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [datac, setDatac] = useState(60);
@@ -142,7 +143,7 @@ if (brandname1 == true || brandname1 == false) {
         return (
           <Box
             key={e.id}
-            onClick={() => console.log(e.id)}
+            onClick={() => navigate(`/singleproducts/${e.id}/${isChecked?"mens":"women"}`)}
             textAlign={"center"}
             bg="white"
             // border={"1px solid green"}

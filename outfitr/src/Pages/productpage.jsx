@@ -698,7 +698,7 @@ const Productpage = () => {
             margin="auto"
           >
             <Box color={"black"} fontWeight={"bold"}>
-              {isCheckeed?"60":"70"} items found
+              {isChecked?"60":"70"} items found
             </Box>
             <Box
               onClick={() => {
