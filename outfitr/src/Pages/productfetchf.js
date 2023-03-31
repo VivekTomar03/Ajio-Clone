@@ -16,78 +16,78 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-const ProductData = ({ val, isChecked, brandname1, toggle,cat,catval }) => {
+const ProductDataf = ({ val, isChecked, brandname1, toggle, cat, catval }) => {
   // console.log(prop.Datachannel1)
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [datac, setDatac] = useState(60);
   // console.log(val)
   const getData = (price, order, brandname) => {
-    
     setLoading(true);
-    if(cat==true){
-if (catval == true || catval == false) {
-  axios
-    .get(
-      `https://embarrassed-fly-yoke.cyclic.app/${
-        isChecked ? "mens" : "women"
-      }?_sort=${price ? price : ""}&_order=${order ? order : ""}`
-    )
-    .then((res) => {
-      setData(res.data);
-      setDatac(res.data.length);
-    });
-  // console.log(data);
-} else {
-  axios
-     .get(
-    `https://embarrassed-fly-yoke.cyclic.app/${
-      isChecked ? "mens" : "women"
-    }${
-      catval !== true && catval !== false
-        ? `?category=${catval}&_sort=${price ? price : ""}&_order=${
-            order ? order : ""
-          }`
-        : `?_sort=${price ? price : ""}&_order=${order ? order : ""}`
-    }`
-  )
-     .then((res) => {
-      // console.log("catcomp")
-       setData(res.data);
-       setDatac(res.data.length);
-     });
-}
-    }else{
-
-    
-if (brandname1 == true || brandname1 == false) {
-  axios
-    .get(
-      `https://embarrassed-fly-yoke.cyclic.app/${
-        isChecked ? "mens" : "women"
-      }?_sort=${price ? price : ""}&_order=${order ? order : ""}`
-    )
-    .then((res) => {
-      setData(res.data);
-      setDatac(res.data.length);
-    }); 
-    // console.log(data)
-} else {
-  axios
-    .get(
-      `https://embarrassed-fly-yoke.cyclic.app/${isChecked ? "mens" : "women"}${
-        brandname1 !== "true" && brandname1 !== false
-          ? `?brand=${brandname1}&_sort=${price ? price : ""}&_order=${
-              order ? order : ""
+    if (cat == true) {
+      if (catval == true || catval == false) {
+        axios
+          .get(
+            `https://embarrassed-fly-yoke.cyclic.app/${
+              isChecked ? "mens" : "women"
+            }?_sort=${price ? price : ""}&_order=${order ? order : ""}`
+          )
+          .then((res) => {
+            setData(res.data);
+            setDatac(res.data.length);
+          });
+        // console.log(data);
+      } else {
+        axios
+          .get(
+            `https://embarrassed-fly-yoke.cyclic.app/${
+              isChecked ? "mens" : "women"
+            }${
+              catval !== true && catval !== false
+                ? `?category=${catval}&_sort=${price ? price : ""}&_order=${
+                    order ? order : ""
+                  }`
+                : `?_sort=${price ? price : ""}&_order=${order ? order : ""}`
             }`
-          : `?_sort=${price ? price : ""}&_order=${order ? order : ""}`
-      }`
-    )
-    .then((res) => {
-      setData(res.data);
-      setDatac(res.data.length);
-    });
-}}
+          )
+          .then((res) => {
+            // console.log("catcomp")
+            setData(res.data);
+            setDatac(res.data.length);
+          });
+      }
+    } else {
+      if (brandname1 == true || brandname1 == false) {
+        axios
+          .get(
+            `https://embarrassed-fly-yoke.cyclic.app/${
+              isChecked ? "mens" : "women"
+            }?_sort=${price ? price : ""}&_order=${order ? order : ""}`
+          )
+          .then((res) => {
+            setData(res.data);
+            setDatac(res.data.length);
+          });
+        // console.log(data)
+      } else {
+        axios
+          .get(
+            `https://embarrassed-fly-yoke.cyclic.app/${
+              isChecked ? "mens" : "women"
+            }${
+              brandname1 !== "true" && brandname1 !== false
+                ? `?brand=${brandname1}&_sort=${price ? price : ""}&_order=${
+                    order ? order : ""
+                  }`
+                : `?_sort=${price ? price : ""}&_order=${order ? order : ""}`
+            }`
+          )
+          .then((res) => {
+            setData(res.data);
+            setDatac(res.data.length);
+          });
+      }
+    }
     setLoading(false);
   };
   const Getdc = () => {
@@ -107,7 +107,7 @@ if (brandname1 == true || brandname1 == false) {
       getData("discount", "asc");
     }
     console.log(catval);
-  }, [val, isChecked, brandname1, toggle, datac,cat,catval]);
+  }, [val, isChecked, brandname1, toggle, datac, cat, catval]);
 
   if (loading) {
     // console.log("loading");
@@ -194,4 +194,4 @@ if (brandname1 == true || brandname1 == false) {
   );
 };
 
-export default ProductData;
+export default ProductDataf;
