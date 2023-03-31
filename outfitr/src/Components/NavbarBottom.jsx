@@ -7,7 +7,6 @@ import {
   Stack,
   Collapse,
   Icon,
-  Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -32,7 +31,7 @@ import HoverMenu from "../Pages/HoverMenu";
 import Hoverwoman from "../Pages/Hoverwoman";
 import Hoverkids from "../Pages/Hoverkids";
 import HoverHome from "../Pages/HoverHome";
-
+import {Link} from 'react-router-dom'
 export default function NavbarBottom() {
   const { isOpen, onToggle } = useDisclosure();
 
@@ -73,12 +72,13 @@ export default function NavbarBottom() {
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
           >
+            <Link to={"/"}>
             <Image
               src="/logoPng1.png"
               alt="logo"
               w={{ base: "150px", md: "170px" }}
               mt="-1.4rem"
-            />
+            /></Link>
           </Text>
 
           <Flex
@@ -307,7 +307,7 @@ const NAV_ITEMS = [
     children: [
       {
         label: <HoverMenu />,
-        href: "#",
+        to: "/mensProduct",
       },
     ],
   },
@@ -316,7 +316,7 @@ const NAV_ITEMS = [
     children: [
       {
         label: <Hoverwoman/>,
-        href: "#",
+        to: "/womensProduct",
       },
     ],
   },

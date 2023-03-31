@@ -39,8 +39,8 @@ function App() {
         <Footer />
       </Box>
 
-    </Container>:
-    <AllRoute/>}
+    </Container>
+    :<AllRoute/>}
     </>
   );
 }
