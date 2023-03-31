@@ -32,7 +32,7 @@ import HoverMenu from "../Pages/HoverMenu";
 import Hoverwoman from "../Pages/Hoverwoman";
 import Hoverkids from "../Pages/Hoverkids";
 import HoverHome from "../Pages/HoverHome";
-
+import {Link as RouterLink} from "react-router-dom"
 export default function NavbarBottom() {
   const { isOpen, onToggle } = useDisclosure();
 
@@ -73,12 +73,14 @@ export default function NavbarBottom() {
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
           >
-            <Image
+           <RouterLink to={"/"}>
+           <Image
               src="/logoPng1.png"
               alt="logo"
               w={{ base: "150px", md: "170px" }}
               mt="-1.4rem"
             />
+           </RouterLink>
           </Text>
 
           <Flex
@@ -148,15 +150,15 @@ const DesktopNav = () => {
        idx===NAV_ITEMS.length-1||idx===NAV_ITEMS.length-2?(<Box key={navItem.label}>
         <Popover trigger={"hover"} placement={"bottom-end"}>
           <PopoverTrigger>
-            <Link
+            <RouterLink
               p={2}
-              href={navItem.href ?? "#"}
+             to={navItem.label==="MEN" ? "/mensproduct":"/"}
               fontSize={"sm"}
               fontWeight={500}
               color={linkColor}
             >
               {navItem.label}
-            </Link>
+            </RouterLink>
           </PopoverTrigger>
 
           {navItem.children && (
@@ -179,15 +181,15 @@ const DesktopNav = () => {
       </Box>) :(<Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
-              <Link
+              <RouterLink
                 p={2}
-                href={navItem.href ?? "#"}
+               to={navItem.label==="MEN" ? "/mensproduct":"/"}
                 fontSize={"sm"}
                 fontWeight={500}
                 color={linkColor}
               >
                 {navItem.label}
-              </Link>
+              </RouterLink>
             </PopoverTrigger>
 
             {navItem.children && (
@@ -307,7 +309,7 @@ const NAV_ITEMS = [
     children: [
       {
         label: <HoverMenu />,
-        href: "#",
+       to: "/mensProduct",
       },
     ],
   },

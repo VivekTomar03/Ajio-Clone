@@ -12,7 +12,7 @@ import { UpArrow } from './UpArrow';
 import SliderM1 from '../Slider/SliderM1';
 import SliderM2 from '../Slider/SliderM2';
 import SliderM3 from '../Slider/SliderM3';
-
+import {Link as RouterLink} from "react-router-dom"
 const MensHomepage = () => {
   return (
     <div
@@ -63,7 +63,7 @@ const MensHomepage = () => {
         pb=".2rem"
       />
     </Box>
-    <SliderM3 />
+    <RouterLink to={"/product"}><SliderM3 /></RouterLink>
     <Box>
       <Image
         src="https://assets.ajio.com/cms/AJIO/WEB/D-MHP-StayInVogueEveryday-header.jpg"

@@ -28,7 +28,7 @@ const ProductDataf = ({ val, isChecked, brandname1, toggle, cat, catval }) => {
       if (catval == true || catval == false) {
         axios
           .get(
-            `https://embarrassed-fly-yoke.cyclic.app/${
+            `https://artistic-butternut-blossom.glitch.me/${
               isChecked ? "mens" : "women"
             }?_sort=${price ? price : ""}&_order=${order ? order : ""}`
           )
@@ -40,7 +40,7 @@ const ProductDataf = ({ val, isChecked, brandname1, toggle, cat, catval }) => {
       } else {
         axios
           .get(
-            `https://embarrassed-fly-yoke.cyclic.app/${
+            `https://artistic-butternut-blossom.glitch.me/${
               isChecked ? "mens" : "women"
             }${
               catval !== true && catval !== false
@@ -60,7 +60,7 @@ const ProductDataf = ({ val, isChecked, brandname1, toggle, cat, catval }) => {
       if (brandname1 == true || brandname1 == false) {
         axios
           .get(
-            `https://embarrassed-fly-yoke.cyclic.app/${
+            `https://artistic-butternut-blossom.glitch.me/${
               isChecked ? "mens" : "women"
             }?_sort=${price ? price : ""}&_order=${order ? order : ""}`
           )
@@ -72,7 +72,7 @@ const ProductDataf = ({ val, isChecked, brandname1, toggle, cat, catval }) => {
       } else {
         axios
           .get(
-            `https://embarrassed-fly-yoke.cyclic.app/${
+            `https://artistic-butternut-blossom.glitch.me/${
               isChecked ? "mens" : "women"
             }${
               brandname1 !== "true" && brandname1 !== false

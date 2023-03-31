@@ -52,9 +52,6 @@ function App() {
     <AllRoute/>}
     </>
 
-       
-    </Container>
-
   );
 }
 
