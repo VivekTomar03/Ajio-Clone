@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 
 import MensHomepage from "./Pages/MensHomepage";
 import Productpage from "./Pages/productpage";
+import SingleProductPage from "./Pages/SingleProductPage";
 
 
 
@@ -50,6 +51,7 @@ function App() {
     </Container>:
     <AllRoute/>}
     </>
+
   );
 }
 
