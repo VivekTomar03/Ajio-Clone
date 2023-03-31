@@ -27,12 +27,12 @@ const CartPage = () => {
   const [qty , setqty] = useState(1)
 
   
-  // console.log(userData, "from cart Page");
+  console.log(userData.cart, "from cart Page");
    useEffect(() => {
-     if(userData){
+     if(userData.cart){
       setcartData(userData.cart)
      }
-      ordertotal()
+      ordertotal() 
   
    },[userData.cart,qty])
   
@@ -50,19 +50,28 @@ const CartPage = () => {
      }
     
 // let object = {...userData}
-  const orderPlaced = ()=> {
-    axios.patch(`https://embarrassed-fly-yoke.cyclic.app/users/${1}` ,{cart:[]})
+  const orderPlaced = (id, obj)=> {
+    axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${id}` ,obj)
      .then((res) => {
        console.log(res);
-       
+       navigate("/")
      })
-     console.log(userData, "from cart Page");
-     if(!userData.cart){
-      navigate("/")
-     }
+     .catch((err) => console.log(err))
+    //  console.log(userData, "from cart Page");
+    
 }
- 
+   
+const handledelete = (id) => {
+console.log(id);
+ const filterdata = cartdata?.filter((el) => el.id!=id)
 
+ axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}` ,{cart:filterdata})
+ .then((res) => {
+   console.log(res);
+  //  navigate("/")
+ })
+ .catch((err) => console.log(err))
+}
       
   return (
     <Box mt={10}>
@@ -71,14 +80,14 @@ const CartPage = () => {
         src="https://assets.ajio.com/cms/AJIO/WEB/28032021-D-cartpagebanner-relianceones.jpg"
         alt="image1"
       />
-     { cartdata!==undefined ? <Box className="Body" w={"90%"} margin="auto" mt={10} >
+     { userData.cart.length? <Box className="Body" w={"90%"} margin="auto" mt={10} >
         <Flex justifyContent={"space-between"}>
           <Text>My Bag(1 item)</Text>
           <Text>+ Add To Wishlist</Text>
         </Flex>
         <Flex mt={4}>
           <Box marginBottom={80} className="Productdispaly" w={"75%"}>
-            {userData.cart &&
+            {
               cartdata?.map((el) => {
                 return (
                   <Flex>
@@ -117,6 +126,7 @@ const CartPage = () => {
                       
                       <Text>Price: {el.price}</Text>
                       <Button
+                       onClick={()=>handledelete(el.id)}
                         color={"#179ED5"}
                         ml={"25%"}
                         w={"fit-content"}
@@ -173,7 +183,7 @@ const CartPage = () => {
                 w={"100%"}
                 h="50px"
 
-                onClick={orderPlaced}
+                onClick={()=>orderPlaced(2, {cart:[1234]})}
               >
                 Place Order
               </Button>
