@@ -12,3 +12,7 @@ export const getmensData = ()=> {
     return  axios.get("https://artistic-butternut-blossom.glitch.me/women")
       
   }
+  export const getData = (e)=> {
+    return  axios.get(`https://embarrassed-fly-yoke.cyclic.app/${e}`)
+      
+  }
