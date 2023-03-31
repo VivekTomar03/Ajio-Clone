@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import axios from 'axios';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -22,9 +23,10 @@ import { ArrowForwardIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import NavbarTop from '../Components/NavbarTop'
 import NavbarBottom from '../Components/NavbarBottom'
 import Footer from '../Components/Footer'
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 
-
-
+import { useSelector } from 'react-redux';
 
 function OrderList() {
   const [show, setShow] = React.useState(false)
@@ -58,19 +60,42 @@ function OrderList() {
 
 
 const SingleProductPage = () => {
+  const [pageData,setPageData]=useState({})
+  const { id,gender } = useParams();
 
-  const { brand, title, price, discount, offer_price, category, image } = data
+  useEffect(()=>{
+    axios.get(`https://artistic-butternut-blossom.glitch.me/${gender}/${id}`)
+    .then((res)=>{
+      
+      setPageData(res.data)
+        
+    }).catch((err)=>{
+        console.log(err)
+    })
+  },[]);
 
-  // useEffect(()=>{
+  const {userData} = useSelector((state) => state.authReducer)
+  
+const handleClick= async()=> {
+  let arr=[];
+   await axios.get(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`)
+  .then((res)=>{
+    arr = res.data.cart
+     arr.push(pageData)
+     console.log(arr)
+  })
 
-  // },[])
-
-
+axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,{
+  cart:arr
+})
+    }
+  console.log(userData)
+  const { brand, title, price, discount, offer_price, category, image }= pageData
 
 
   return (
     <div>
-     <Container maxW={"100%"} p={0} m={0}>
+     {/* <Container maxW={"100%"} p={0} m={0}>
         <Box
         bgColor={"rgb(255, 255, 255)"}
         w={"100%"}
@@ -86,11 +111,11 @@ const SingleProductPage = () => {
         
       </Box>
       
-      </Container>
+      </Container> */}
 
 
 
-      <Box mx="auto" w="95%"  border={"1px solid black"}>
+      <Box mx="auto" w="95%"  >
 
         {/* Navigate LInk Path  Start*/}
         <Box fontSize="sm" marginTop={10} >
@@ -116,10 +141,10 @@ const SingleProductPage = () => {
 
 
         <Box w="100%" p="0rem 5rem"
-          display="flex" gap="50px" justifyContent='space-between' flexDirection={{ base: "column", md: "row" }} border="1px solid black">
+          display="flex" gap="50px" justifyContent='space-between' flexDirection={{ base: "column", md: "row" }} >
           {/* Product Images  */}
 
-          <Box w="100%" border={"1px solid black"}>
+          <Box w="100%" >
             <img src={image} alt="img" />
 
             <Tabs variant='enclosed'>
@@ -140,7 +165,7 @@ const SingleProductPage = () => {
 
           {/* Product Data  */}
 
-          <Box w="40%" margin={"auto"} border="1px solid black" >
+          <Box w="40%" margin={"auto"}  >
             <Text pt="10px" textAlign={"center"} fontSize='lg' color="#BFAC8E">{brand}</Text>
             <Text textAlign={"center"} fontSize='lg'>{title}</Text>
             <Text textAlign={"center"} fontSize='2xl' pt="14px">₹{offer_price}</Text>
@@ -228,6 +253,7 @@ const SingleProductPage = () => {
                 boxShadow:
                   '0 0 1px 2px #D5A249, 0 1px 1px rgba(255, 255, 255, 0.15)',
               }}
+              onClick={handleClick}
             >
               <Box display="flex" flexDirection={"row"} gap={"10px"}>
                 <BsBag />
