@@ -15,6 +15,7 @@ const NavbarTop = () => {
         >
           <Login /> / Join OUTFITR
         </Box>
+        <Link to={"/mensproduct"}>
         <Box
           fontSize={".9rem"}
           fontFamily="monospace"
@@ -25,6 +26,7 @@ const NavbarTop = () => {
         >
           Customer Care
         </Box>
+        </Link>
         <Link to={"/adminPage"}>
           <Box
             fontSize={".9rem"}

@@ -50,12 +50,6 @@ function App() {
     </Container>:
     <AllRoute/>}
     </>
-
-       
-    </Container>
- 
- 
-
   );
 }
 

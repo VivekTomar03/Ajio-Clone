@@ -20,6 +20,7 @@ const SliderM3 = () => {
       navigation={true}
       modules={[Navigation]}
     >
+     
       <SwiperSlide>
         <img
           src="https://assets.ajio.com/cms/AJIO/WEB/D-MHP-SponsoredBrands-levis-flat50extra10.jpg"
@@ -34,6 +35,8 @@ const SliderM3 = () => {
           }}
         />
       </SwiperSlide>
+        
+     
       <SwiperSlide>
         <img
           src="	https://assets.ajio.com/cms/AJIO/WEB/D-MHP-SponsoredBrands-marks&spencer-min40extra35.jpg"
