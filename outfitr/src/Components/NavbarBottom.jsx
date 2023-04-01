@@ -32,8 +32,10 @@ import HoverMenu from "../Pages/HoverMenu";
 import Hoverwoman from "../Pages/Hoverwoman";
 import Hoverkids from "../Pages/Hoverkids";
 import HoverHome from "../Pages/HoverHome";
-
+import {Link as RouterLink} from "react-router-dom"
+import { useSelector } from "react-redux";
 export default function NavbarBottom() {
+  const {userData,isLoading} = useSelector((state) => state.authReducer)
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -73,12 +75,14 @@ export default function NavbarBottom() {
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
           >
-            <Image
+           <RouterLink to={"/"}>
+           <Image
               src="/logoPng1.png"
               alt="logo"
               w={{ base: "150px", md: "170px" }}
               mt="-1.4rem"
             />
+           </RouterLink>
           </Text>
 
           <Flex
@@ -120,7 +124,8 @@ export default function NavbarBottom() {
         >
           <AiOutlineHeart />
         </Circle>
-        <Circle
+         <RouterLink to={"/cartPage"}>
+         <Circle
           bgColor={useColorModeValue("rgb(43, 64, 82)", "rgb(43, 64, 82)")}
           color={useColorModeValue("white", "white")}
           fontSize="1.3rem"
@@ -129,6 +134,16 @@ export default function NavbarBottom() {
         >
           <AiOutlineShoppingCart />
         </Circle>
+         <Circle
+          bgColor={useColorModeValue("rgb(43, 64, 82)", "rgb(43, 64, 82)")}
+          color={useColorModeValue("white", "white")}
+          fontSize="1.3rem"
+          p="0.5rem"
+          ml="1rem"
+        >
+        {/* {console.log(userData)} */}
+        </Circle>
+         </RouterLink>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -148,15 +163,15 @@ const DesktopNav = () => {
        idx===NAV_ITEMS.length-1||idx===NAV_ITEMS.length-2?(<Box key={navItem.label}>
         <Popover trigger={"hover"} placement={"bottom-end"}>
           <PopoverTrigger>
-            <Link
+            <RouterLink
               p={2}
-              href={navItem.href ?? "#"}
+             to={navItem.label==="MEN" ? "/mensproduct":"/"}
               fontSize={"sm"}
               fontWeight={500}
               color={linkColor}
             >
               {navItem.label}
-            </Link>
+            </RouterLink>
           </PopoverTrigger>
 
           {navItem.children && (
@@ -179,15 +194,15 @@ const DesktopNav = () => {
       </Box>) :(<Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
-              <Link
+              <RouterLink
                 p={2}
-                href={navItem.href ?? "#"}
+               to={navItem.label==="MEN" ? "/mensproduct":"/"}
                 fontSize={"sm"}
                 fontWeight={500}
                 color={linkColor}
               >
                 {navItem.label}
-              </Link>
+              </RouterLink>
             </PopoverTrigger>
 
             {navItem.children && (
@@ -307,7 +322,7 @@ const NAV_ITEMS = [
     children: [
       {
         label: <HoverMenu />,
-        href: "#",
+       to: "/mensProduct",
       },
     ],
   },

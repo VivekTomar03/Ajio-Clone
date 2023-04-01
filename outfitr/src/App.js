@@ -4,15 +4,24 @@ import Footer from "./Components/Footer";
 import { Hovermenu } from "./Components/Hovermenu";
 import NavbarBottom from "./Components/NavbarBottom";
 import NavbarTop from "./Components/NavbarTop";
-import Homepage from "./Pages/Homepage";
-import Register from "./Pages/Register";
+import AllRoute from "./MainRoute/AllRoute";
+
+import { useLocation } from "react-router-dom";
+
+import MensHomepage from "./Pages/MensHomepage";
+import Productpage from "./Pages/productpage";
+import SingleProductPage from "./Pages/SingleProductPage";
+
 
 
 
 
 
 function App() {
+  let location=useLocation()
   return (
+    <>
+    {location.pathname!=="/payment"?
   <Container maxW={"100%"} p={0} m={0}>
       <Box
         bgColor={"rgb(255, 255, 255)"}
@@ -21,13 +30,13 @@ function App() {
         left="0"
         mt="-.9rem"
         position="sticky"
-        zIndex="100"
+        zIndex="10"
         boxShadow={"0px 0px 10px 0px rgba(0,0,0,0.75)"}
       >
         <NavbarTop />
         <NavbarBottom />
       </Box>
-      <Homepage />
+       <AllRoute/>
       <Box style={{ cursor: "pointer" }} >
         <Image
           pb={{ base: "1rem", md: "1rem", lg: "1rem" }}
@@ -37,7 +46,11 @@ function App() {
         />
         <Footer />
       </Box>
-    </Container>
+
+
+    </Container>:
+    <AllRoute/>}
+    </>
 
   );
 }

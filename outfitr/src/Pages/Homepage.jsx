@@ -9,7 +9,7 @@ import Slider6 from "./Slider6";
 import Slider7 from "./Slider7";
 import Slider8 from "./Slider8";
 import { UpArrow } from "./UpArrow";
-
+ 
 const Homepage = () => {
   return (
     <div
