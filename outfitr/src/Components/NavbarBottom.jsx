@@ -33,7 +33,9 @@ import Hoverwoman from "../Pages/Hoverwoman";
 import Hoverkids from "../Pages/Hoverkids";
 import HoverHome from "../Pages/HoverHome";
 import {Link as RouterLink} from "react-router-dom"
+import { useSelector } from "react-redux";
 export default function NavbarBottom() {
+  const {userData,isLoading} = useSelector((state) => state.authReducer)
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -122,7 +124,8 @@ export default function NavbarBottom() {
         >
           <AiOutlineHeart />
         </Circle>
-        <Circle
+         <RouterLink to={"/cartPage"}>
+         <Circle
           bgColor={useColorModeValue("rgb(43, 64, 82)", "rgb(43, 64, 82)")}
           color={useColorModeValue("white", "white")}
           fontSize="1.3rem"
@@ -131,6 +134,16 @@ export default function NavbarBottom() {
         >
           <AiOutlineShoppingCart />
         </Circle>
+         <Circle
+          bgColor={useColorModeValue("rgb(43, 64, 82)", "rgb(43, 64, 82)")}
+          color={useColorModeValue("white", "white")}
+          fontSize="1.3rem"
+          p="0.5rem"
+          ml="1rem"
+        >
+        {/* {console.log(userData)} */}
+        </Circle>
+         </RouterLink>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>

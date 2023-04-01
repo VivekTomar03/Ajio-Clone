@@ -23,38 +23,15 @@ const CartPage = () => {
   const {userData} = useSelector((state) => state.authReducer)
   const [cartdata, setcartData] = useState([]);
   const navigate = useNavigate()
-  const [price , setprice] = useState(0)
+  const [price , setprice] = useState(419)
   const [qty , setqty] = useState(1)
-
   
-  console.log(userData.cart, "from cart Page");
-   useEffect(() => {
-     if(userData.cart){
-      setcartData(userData.cart)
-     }
-      ordertotal() 
-  
-   },[userData.cart,qty])
-  
-     const ordertotal = () => {
-     
-      userData.cart && cartdata.map((el) => {
-           if(qty==0){
-            setprice(el.price)
-           }
-           else{
-            setprice(el.price*qty)
-           }
-       })
-        
-     }
-    
-// let object = {...userData}
-  const orderPlaced = (id, obj)=> {
-    axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${id}` ,obj)
+  const orderPlaced = (id, obj={cart:[]})=> {
+ 
+    axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}` ,obj)
      .then((res) => {
        console.log(res);
-       navigate("/")
+       navigate("/" )
      })
      .catch((err) => console.log(err))
     //  console.log(userData, "from cart Page");
@@ -67,12 +44,28 @@ console.log(id);
 
  axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}` ,{cart:filterdata})
  .then((res) => {
-   console.log(res);
+  //  console.log(res);
+   setcartData(filterdata)
   //  navigate("/")
  })
  .catch((err) => console.log(err))
+
 }
       
+
+useEffect(()=>{
+axios.get(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`).then((res)=>{
+  // console.log(res.data, "line 81")
+  setcartData(res?.data?.cart)
+})
+ 
+ cartdata?.map((el)=> {
+
+  return setprice(el.price*qty)
+ })
+
+},[userData.cart,qty])
+
   return (
     <Box mt={10}>
       <Image
@@ -80,7 +73,7 @@ console.log(id);
         src="https://assets.ajio.com/cms/AJIO/WEB/28032021-D-cartpagebanner-relianceones.jpg"
         alt="image1"
       />
-     { userData.cart.length? <Box className="Body" w={"90%"} margin="auto" mt={10} >
+     { cartdata.length!==0? <Box className="Body" w={"90%"} margin="auto" mt={10} >
         <Flex justifyContent={"space-between"}>
           <Text>My Bag(1 item)</Text>
           <Text>+ Add To Wishlist</Text>
@@ -115,8 +108,8 @@ console.log(id);
                        </Flex>
                      <Flex gap={1}>
                        QTY
-                     <Select onChange={(e) => setqty(+e.target.value)} w={"fit-content"} placeholder={(userData.cart.length)} size={"10px"}>
-                        
+                     <Select onChange={(e) => setqty(+e.target.value)} w={"fit-content"} placeholder={("1")} size={"10px"}>
+                     <option value="2">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -148,8 +141,8 @@ console.log(id);
                       </Flex>
                     </Grid>
                   </Flex>
-                );
-              })}
+                )
+              })}:
           </Box>
           <Box w={"25%"} h={"300px"} className="CartTotal">
             <Flex
@@ -183,7 +176,7 @@ console.log(id);
                 w={"100%"}
                 h="50px"
 
-                onClick={()=>orderPlaced(2, {cart:[1234]})}
+                onClick={orderPlaced}
               >
                 Place Order
               </Button>

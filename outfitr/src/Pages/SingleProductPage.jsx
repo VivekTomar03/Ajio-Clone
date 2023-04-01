@@ -75,6 +75,24 @@ const SingleProductPage = () => {
   },[]);
 
   const {userData} = useSelector((state) => state.authReducer)
+
+    
+//   const handleClick = async() =>{
+//     let payload = [...userData.cart , pageData]
+
+//   await  axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,{cart:payload})
+
+  
+
+// }
+
+  // const handleClick = () =>{
+  //      let payload = [...userData.cart , pageData]
+
+  //      axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,{cart:payload})
+
+
+  // }
   
 const handleClick= async()=> {
   let arr=[];
@@ -89,6 +107,8 @@ axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,
   cart:arr
 })
     }
+
+
   console.log(userData)
   const { brand, title, price, discount, offer_price, category, image }= pageData
 
