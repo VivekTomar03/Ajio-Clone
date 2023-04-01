@@ -23,7 +23,7 @@ const CartPage = () => {
   const {userData} = useSelector((state) => state.authReducer)
   const [cartdata, setcartData] = useState([]);
   const navigate = useNavigate()
-  const [price , setprice] = useState(419)
+  const [price , setprice] = useState(0)
   const [qty , setqty] = useState(1)
   
   const orderPlaced = (id, obj={cart:[]})=> {
@@ -31,7 +31,7 @@ const CartPage = () => {
     axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}` ,obj)
      .then((res) => {
        console.log(res);
-       navigate("/" )
+       navigate("/payment" , {state:{price:price}})
      })
      .catch((err) => console.log(err))
     //  console.log(userData, "from cart Page");
@@ -39,7 +39,7 @@ const CartPage = () => {
 }
    
 const handledelete = (id) => {
-console.log(id);
+// console.log(id);
  const filterdata = cartdata?.filter((el) => el.id!=id)
 
  axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}` ,{cart:filterdata})
@@ -66,6 +66,13 @@ axios.get(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`).t
 
 },[userData.cart,qty])
 
+ useEffect(() => {
+  axios.get(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`).then((res)=>{
+     let mydata = res?.data?.cart
+       mydata?.map((el) => setprice((price) => (price+el.price)))
+  })
+   
+ },[])
   return (
     <Box mt={10}>
       <Image
@@ -89,8 +96,10 @@ axios.get(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`).t
                       h="200px"
                       src={el.image}
                       alt={el.title}
+                      padding={5}
                     />
-                    <Grid ml={5} templateColumns="repeat(4, 1fr)">
+                   
+                    <Grid  gap={10} ml={5} templateColumns="repeat(4, 1fr)">
                       <Text>{el.title}</Text>
                        <Flex gap={1}>
                         Size
@@ -108,7 +117,7 @@ axios.get(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`).t
                        </Flex>
                      <Flex gap={1}>
                        QTY
-                     <Select onChange={(e) => setqty(+e.target.value)} w={"fit-content"} placeholder={("1")} size={"10px"}>
+                     <Select onChange={(e) => setqty(+e.target.value)} w={"fit-content"} placeholder={`selected${qty}`} size={"10px"}>
                      <option value="2">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -139,7 +148,9 @@ axios.get(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`).t
                           Add To WishList
                         </Text>
                       </Flex>
+                      
                     </Grid>
+                    
                   </Flex>
                 )
               })}:
