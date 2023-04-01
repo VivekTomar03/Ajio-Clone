@@ -27,6 +27,7 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 import { useSelector } from 'react-redux';
+import Toaster from '../Components/Toaster';
 
 function OrderList() {
   const [show, setShow] = React.useState(false)
@@ -141,15 +142,15 @@ axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,
         <Box fontSize="sm" marginTop={10} >
           <Breadcrumb color='gray'>
             <BreadcrumbItem>
-              <BreadcrumbLink href='#'>Home</BreadcrumbLink>
+              <BreadcrumbLink href='/'>Home</BreadcrumbLink>
             </BreadcrumbItem>
 
             <BreadcrumbItem>
-              <BreadcrumbLink href='#'>Docs</BreadcrumbLink>
+              <BreadcrumbLink href='/product'>Product</BreadcrumbLink>
             </BreadcrumbItem>
 
             <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href='#'>Breadcrumb</BreadcrumbLink>
+              <BreadcrumbLink href='/singleproducts/:id/:gender'>{title}</BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
@@ -164,10 +165,10 @@ axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,
           display="flex" gap="50px" justifyContent='space-between' flexDirection={{ base: "column", md: "row" }} >
           {/* Product Images  */}
 
-          <Box w="100%" >
+          <Box w="100%"  padding={"50px"}>
             <img src={image} alt="img" />
-
-            <Tabs variant='enclosed'>
+              
+            <Tabs variant='enclosed' marginTop="25px" px={"25px"}>
   <TabList>
     <Tab>RETURNS</Tab>
     <Tab>OUR PROMISE</Tab>
@@ -256,7 +257,7 @@ axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,
               lineHeight='1.2'
               transition='all 0.2s cubic-bezier(.08,.52,.52,1)'
               border='1px'
-              px='80px'
+              
 
               fontSize='14px'
               fontWeight='semibold'
@@ -273,12 +274,14 @@ axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,
                 boxShadow:
                   '0 0 1px 2px #D5A249, 0 1px 1px rgba(255, 255, 255, 0.15)',
               }}
+
               onClick={handleClick}
             >
-              <Box display="flex" flexDirection={"row"} gap={"10px"}>
-                <BsBag />
-                <Text> ADD TO BAG</Text>
-              </Box>
+              
+              
+               
+                <Toaster/>
+             
 
             </Box>
 
@@ -326,7 +329,7 @@ axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,
                 <ListItem>Machine wash</ListItem>
                 <ListItem>100% polyester</ListItem>
                 <ListItem>Product Code: 440971924001</ListItem>
-                <ListItem color={'teal'}><Link href='#'>About PERFORMAX</Link></ListItem>
+                <ListItem color={'teal'}><a href='#about'>About {brand}</a></ListItem>
               </UnorderedList>
               <OrderList />
             </Box>
@@ -340,7 +343,8 @@ axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,
 {/* Lower Part  */}
 
         <Grid margin={"20px"} gridTemplateColumns={"repeat(2,1fr)"} columnGap={"200px"}>
-          <GridItem position={"relative"} borderBottom={"1px solid gray"}><Text fontSize={"19px"} fontWeight={"bold"} textColor="#585858" right={"-185px"} top="-15px" position={"absolute"}>About {brand}</Text></GridItem>
+          <GridItem position={"relative"} borderBottom={"1px solid gray"}><Text fontSize={"19px"} fontWeight={"bold"} textColor="#585858" right={"-185px"} top="-15px" 
+          position={"absolute"} id='about'>About {brand}</Text></GridItem>
           <GridItem borderBottom={"1px solid gray"}></GridItem>
         </Grid>
         <Box display={"flex"} width="90%" gap={"30px"} m="auto" alignItems={"center"} mb="5rem"> 

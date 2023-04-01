@@ -10,13 +10,14 @@ import Register from '../Pages/Register'
 import SingleProductPage from '../Pages/SingleProductPage'
 import Productpagef from '../Pages/productpagef'
 import MensHomepage from '../Pages/MensHomepage'
+import WomenHomepage from '../Pages/WomenHomepage'
 
 const AllRoute = () => {
   return (
     <Routes>
        <Route path='/' element={<Homepage/>}></Route>
        <Route path='/mensProduct' element={<MensHomepage/>}></Route>
-       {/* <Route path='/womensProduct' element={<Productpage/>}></Route> */}
+       <Route path='/womensProduct' element={<WomenHomepage/>}></Route>
        <Route path='/product' element={<Productpage/>}></Route>
        <Route path='/singleproducts/:id/:gender' element={<SingleProductPage/>}></Route>
        <Route path='/cartPage' element={<CartPage/>}></Route>
