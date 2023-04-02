@@ -1,5 +1,5 @@
 import axios from "axios"
-import { GETUSERLOGIN, GETUSERLOGINFAIL, GETUSERLOGINSUCCESS, POSTREQFAIL, POSTREQSUCESS, POSTUSERREQ } from "./actiontype"
+import { GETUSERLOGIN, GETUSERLOGINFAIL, GETUSERLOGINSUCCESS, POSTREQFAIL, POSTREQSUCESS, POSTUSERREQ,GETUSERLOGOUT } from "./actiontype"
 export const getLoginReq = ({email, password}) =>(dispatch)=> {
      dispatch({type:GETUSERLOGIN})
 return  axios.get(`https://artistic-butternut-blossom.glitch.me/users?email=${email}&password=${password}`)
@@ -18,3 +18,10 @@ export const postReqUser = (data)=>(dispatch)=> {
     .then((res) => dispatch({type:POSTREQSUCESS}))
     .catch(() => dispatch({type:POSTREQFAIL}))
 }
+
+export const getLogoutReq = ()=>(dispatch)=> {
+    dispatch({type:GETUSERLOGOUT})
+}
+
+
+

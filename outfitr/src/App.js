@@ -7,10 +7,7 @@ import NavbarTop from "./Components/NavbarTop";
 import AllRoute from "./MainRoute/AllRoute";
 
 import { useLocation } from "react-router-dom";
-
-import MensHomepage from "./Pages/MensHomepage";
-import Productpage from "./Pages/productpage";
-import SingleProductPage from "./Pages/SingleProductPage";
+import React from "react";
 
 
 
@@ -18,6 +15,10 @@ import SingleProductPage from "./Pages/SingleProductPage";
 
 
 function App() {
+
+
+
+
   let location=useLocation()
   return (
     <>

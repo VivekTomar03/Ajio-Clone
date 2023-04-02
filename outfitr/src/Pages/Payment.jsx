@@ -1,12 +1,17 @@
 import React, { useContext ,useState} from 'react'
 import './Payment.css'
 import { useCreditCardValidator, images } from 'react-creditcard-validator';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate} from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react'
 export default function Payment() {
+  const location = useLocation();
+  const end = location.state.price;
+  console.log(end, "from Payment")
   const [load,setload]=useState(false)
   let Nav=useNavigate()
   function expDateValidate(month, year) {
+  
+   
     if (Number(year) > 2035) {
       return 'Expiry Date Year cannot be greater than 2035';
     }
@@ -45,7 +50,7 @@ export default function Payment() {
       <p style={{display:"flex",justifyContent:"center",fontSize:"x-large",color:"#647070",fontWeight:"lighter",borderBottom:"1px solid",backgroundColor:"#eff2ff",borderTopLeftRadius:"10px",borderTopRightRadius:"10px",padding:"20px"}}>Pay Invoice</p>
       <div style={{padding:"20px"}}>
       <label style={{textTransform:"uppercase",fontWeight:"600",fontSize:"15px"}}>Payment amount</label><br />
-      <span style={{fontSize:"22px"}}>₹{new Intl.NumberFormat('en-IN',{maximumSignificantDigits:3}).format(40)}</span><br />
+      <span style={{fontSize:"22px"}}>₹{new Intl.NumberFormat('en-IN',{maximumSignificantDigits:3}).format(end)}</span><br />
       <div style={{marginTop:"10px"}}>
       <label style={{textTransform:"uppercase",fontWeight:"600",fontSize:"15px"}} htmlFor="" >Name on Card</label>
       <input style={{display:"block",width:"100%",borderRadius:"5px",border:"2px solid gray",height:"45px",paddingLeft:"5px"}} type="text" required  />
@@ -73,7 +78,7 @@ export default function Payment() {
           <small style={{color:"red",fontSize:"10px",display:"block"}}>{erroredInputs.cvc && erroredInputs.cvc}</small>
         </div>
       </div>
-      <button id='btn'>PAY₹{new Intl.NumberFormat('en-IN',{maximumSignificantDigits:3}).format(40)}</button>
+      <button id='btn'>PAY₹{new Intl.NumberFormat('en-IN',{maximumSignificantDigits:3}).format(end)}</button>
       </div>
       </form>
     </main>

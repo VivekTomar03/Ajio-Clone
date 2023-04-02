@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Login from "../Pages/Login";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from '@chakra-ui/react'
+import { useSelector } from "react-redux";
+import Logout from "../Components/Logout";
 import {
   Modal,
   ModalOverlay,
@@ -12,7 +14,9 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+
 const NavbarTop = () => {
+  let {isLogin } = useSelector((state) => state.authReducer);
   const nav=useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [email, setemail] = useState();
@@ -32,7 +36,7 @@ const NavbarTop = () => {
           cursor={"pointer"}
           opacity={0.7}
         >
-          <Login /> / Join OUTFITR
+          {isLogin ? <Logout /> : <Login />}
         </Box>
         <Link to={"/mensproduct"}>
           <Box
