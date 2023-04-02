@@ -5,7 +5,7 @@ import { useLocation, useNavigate} from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react'
 export default function Payment() {
   const location = useLocation();
-  const end = location.state.price;
+  const end = location?.state?.price||0;
   console.log(end, "from Payment")
   const [load,setload]=useState(false)
   let Nav=useNavigate()
@@ -58,7 +58,7 @@ export default function Payment() {
       <div className="input-group">
         <svg style={{position:"relative",top:"55px",left:"225px"}} {...getCardImageProps({ images })} />
         <label style={{textTransform:"uppercase",fontWeight:"600",fontSize:"15px"}}>Card Number</label>
-        <input style={{display:"block",width:"100%",borderRadius:"5px",border:"2px solid gray",height:"45px",paddingLeft:"5px"}} required
+        <input value={"5175 7400 1375 6845"} style={{display:"block",width:"100%",borderRadius:"5px",border:"2px solid gray",height:"45px",paddingLeft:"5px"}} required
           {...getCardNumberProps({
           })}
         />

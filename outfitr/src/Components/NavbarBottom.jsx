@@ -142,7 +142,7 @@ export default function NavbarBottom() {
               <AiOutlineShoppingCart />
             </Circle>
             <Circle mt="-1.2rem" color={"red"} fontSize="1.3rem">
-              {cart}
+              {/* {cart} */}
               
             </Circle>
           </Flex>

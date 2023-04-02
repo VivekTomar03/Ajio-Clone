@@ -25,7 +25,7 @@ const CartPage = () => {
   const navigate = useNavigate()
   const [price , setprice] = useState(0)
   const [qty , setqty] = useState(1)
-  
+ 
   const orderPlaced = (id, obj={cart:[]})=> {
  
     axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}` ,obj)
@@ -215,7 +215,7 @@ axios.get(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`).t
            
              <Image  src="https://cdn.dribbble.com/users/324185/screenshots/15805709/media/98798b7662d8a4b21cb66ad4bd430b48.jpg?compress=1&resize=800x600&vertical=top" alt="empty"/>
             </Center>
-          <Center mt={5}> <Button onClick={() => navigate("/")} _hover={{backgroundColor:"orange.100"}} bg={"orange"} w={"80%"}>Back To Home</Button></Center>
+          <Center mt={5}> <Button mb={10} onClick={() => navigate("/")} _hover={{backgroundColor:"orange.100"}} bg={"orange"} w={"80%"}>Back To Home</Button></Center>
         </Container>
         
       }
