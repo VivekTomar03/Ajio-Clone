@@ -25,9 +25,9 @@ const ProductData = ({ val, isChecked, brandname1, toggle,cat,catval }) => {
   // console.log(val)
   const getData = (price, order, brandname) => {
     
-    setLoading(true);
     if(cat==true){
-if (catval == true || catval == false) {
+      if (catval == true || catval == false) {
+  setLoading(true);
   axios
     .get(
       `https://embarrassed-fly-yoke.cyclic.app/${
@@ -35,11 +35,13 @@ if (catval == true || catval == false) {
       }?_sort=${price ? price : ""}&_order=${order ? order : ""}`
     )
     .then((res) => {
+      setLoading(false)
       setData(res.data);
       setDatac(res.data.length);
     });
   // console.log(data);
 } else {
+  setLoading(true)
   axios
      .get(
     `https://embarrassed-fly-yoke.cyclic.app/${
@@ -53,7 +55,7 @@ if (catval == true || catval == false) {
     }`
   )
      .then((res) => {
-      // console.log("catcomp")
+     setLoading(false)
        setData(res.data);
        setDatac(res.data.length);
      });
@@ -62,6 +64,7 @@ if (catval == true || catval == false) {
 
     
 if (brandname1 == true || brandname1 == false) {
+  setLoading(true)
   axios
     .get(
       `https://embarrassed-fly-yoke.cyclic.app/${
@@ -69,11 +72,13 @@ if (brandname1 == true || brandname1 == false) {
       }?_sort=${price ? price : ""}&_order=${order ? order : ""}`
     )
     .then((res) => {
+      setLoading(false)
       setData(res.data);
       setDatac(res.data.length);
     }); 
     // console.log(data)
 } else {
+  setLoading(true)
   axios
     .get(
       `https://embarrassed-fly-yoke.cyclic.app/${isChecked ? "mens" : "women"}${
@@ -85,11 +90,12 @@ if (brandname1 == true || brandname1 == false) {
       }`
     )
     .then((res) => {
+      setLoading(false)
       setData(res.data);
       setDatac(res.data.length);
     });
 }}
-    setLoading(false);
+    // setLoading(false);
   };
   const Getdc = () => {
     return useNavigate({ data: datac });
