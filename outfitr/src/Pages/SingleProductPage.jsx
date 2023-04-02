@@ -101,7 +101,7 @@ const handleClick= async()=> {
   .then((res)=>{
     arr = res.data.cart
      arr.push(pageData)
-     console.log(arr)
+    //  console.log(arr)
   })
 
 axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,{
@@ -110,7 +110,7 @@ axios.patch(`https://artistic-butternut-blossom.glitch.me/users/${userData.id}`,
     }
 
 
-  console.log(userData)
+  // console.log(userData)
   const { brand, title, price, discount, offer_price, category, image }= pageData
 
 
