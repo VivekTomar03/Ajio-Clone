@@ -2,7 +2,16 @@ import { Box, Container, Flex } from "@chakra-ui/react";
 import React from "react";
 import Login from "../Pages/Login";
 import { Link } from "react-router-dom";
-const NavbarTop = () => {
+import { useSelector } from "react-redux";
+import Logout from "../Components/Logout";
+
+ const NavbarTop = () => {
+  let {isLogin } = useSelector((state) => state.authReducer);
+
+
+;
+
+
   return (
     <Container maxW={"100%"}>
       <Flex w={["90%", "90%", "900%", "90%"]} m={4} gap={10} justify="flex-end">
@@ -13,7 +22,7 @@ const NavbarTop = () => {
           cursor={"pointer"}
           opacity={0.7}
         >
-          <Login /> / Join OUTFITR
+          {isLogin ? <Logout /> : <Login />}
         </Box>
         <Link to={"/mensproduct"}>
         <Box

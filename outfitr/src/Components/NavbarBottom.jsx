@@ -32,11 +32,16 @@ import HoverMenu from "../Pages/HoverMenu";
 import Hoverwoman from "../Pages/Hoverwoman";
 import Hoverkids from "../Pages/Hoverkids";
 import HoverHome from "../Pages/HoverHome";
-import {Link as RouterLink} from "react-router-dom"
+import { Link as RouterLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
 export default function NavbarBottom() {
-  const {userData,isLoading} = useSelector((state) => state.authReducer)
+  const { userData } = useSelector((state) => state.authReducer);
+
+  let cart = userData?.cart?.length;
   const { isOpen, onToggle } = useDisclosure();
+ 
+
 
   return (
     <Box>
@@ -75,14 +80,14 @@ export default function NavbarBottom() {
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
           >
-           <RouterLink to={"/"}>
-           <Image
-              src="/logoPng1.png"
-              alt="logo"
-              w={{ base: "150px", md: "170px" }}
-              mt="-1.4rem"
-            />
-           </RouterLink>
+            <RouterLink to={"/"}>
+              <Image
+                src="/logoPng1.png"
+                alt="logo"
+                w={{ base: "150px", md: "170px" }}
+                mt="-1.4rem"
+              />
+            </RouterLink>
           </Text>
 
           <Flex
@@ -124,26 +129,24 @@ export default function NavbarBottom() {
         >
           <AiOutlineHeart />
         </Circle>
-         <RouterLink to={"/cartPage"}>
-         <Circle
-          bgColor={useColorModeValue("rgb(43, 64, 82)", "rgb(43, 64, 82)")}
-          color={useColorModeValue("white", "white")}
-          fontSize="1.3rem"
-          p="0.5rem"
-          ml="1rem"
-        >
-          <AiOutlineShoppingCart />
-        </Circle>
-         <Circle
-          bgColor={useColorModeValue("rgb(43, 64, 82)", "rgb(43, 64, 82)")}
-          color={useColorModeValue("white", "white")}
-          fontSize="1.3rem"
-          p="0.5rem"
-          ml="1rem"
-        >
-        {/* {console.log(userData)} */}
-        </Circle>
-         </RouterLink>
+        <RouterLink to={"/cartPage"}>
+          <Flex>
+            <Circle
+              bgColor={useColorModeValue("rgb(43, 64, 82)", "rgb(43, 64, 82)")}
+              color={useColorModeValue("white", "white")}
+              fontSize="1.3rem"
+              p="0.5rem"
+              ml="1rem"
+              mr=".2rem"
+            >
+              <AiOutlineShoppingCart />
+            </Circle>
+            <Circle mt="-1.2rem" color={"red"} fontSize="1.3rem">
+              {cart}
+              
+            </Circle>
+          </Flex>
+        </RouterLink>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -159,71 +162,75 @@ const DesktopNav = () => {
 
   return (
     <Stack direction={"row"} spacing={7}>
-      {NAV_ITEMS.map((navItem,idx) => (
-       idx===NAV_ITEMS.length-1||idx===NAV_ITEMS.length-2?(<Box key={navItem.label}>
-        <Popover trigger={"hover"} placement={"bottom-end"}>
-          <PopoverTrigger>
-            <RouterLink
-              p={2}
-             to={navItem.label==="MEN" ? "/mensproduct":"/"}
-              fontSize={"sm"}
-              fontWeight={500}
-              color={linkColor}
-            >
-              {navItem.label}
-            </RouterLink>
-          </PopoverTrigger>
+      {NAV_ITEMS.map((navItem, idx) =>
+        idx === NAV_ITEMS.length - 1 || idx === NAV_ITEMS.length - 2 ? (
+          <Box key={navItem.label}>
+            <Popover trigger={"hover"} placement={"bottom-end"}>
+              <PopoverTrigger>
+                <RouterLink
+                  p={2}
+                  to={navItem.label === "MEN" ? "/mensproduct" : "/"}
+                  fontSize={"sm"}
+                  fontWeight={500}
+                  color={linkColor}
+                >
+                  {navItem.label}
+                </RouterLink>
+              </PopoverTrigger>
 
-          {navItem.children && (
-            <PopoverContent
-              border={0}
-              boxShadow={"xl"}
-              bg={popoverContentBgColor}
-              p={4}
-              rounded={"xl"}
-              minW={"sm"}
-            >
-              <Stack>
-                {navItem.children.map((child) => (
-                  <DesktopSubNav key={child.label} {...child} />
-                ))}
-              </Stack>
-            </PopoverContent>
-          )}
-        </Popover>
-      </Box>) :(<Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
-            <PopoverTrigger>
-              <RouterLink
-                p={2}
-               to={navItem.label==="MEN" ? "/mensproduct":"/"}
-                fontSize={"sm"}
-                fontWeight={500}
-                color={linkColor}
-              >
-                {navItem.label}
-              </RouterLink>
-            </PopoverTrigger>
+              {navItem.children && (
+                <PopoverContent
+                  border={0}
+                  boxShadow={"xl"}
+                  bg={popoverContentBgColor}
+                  p={4}
+                  rounded={"xl"}
+                  minW={"sm"}
+                >
+                  <Stack>
+                    {navItem.children.map((child) => (
+                      <DesktopSubNav key={child.label} {...child} />
+                    ))}
+                  </Stack>
+                </PopoverContent>
+              )}
+            </Popover>
+          </Box>
+        ) : (
+          <Box key={navItem.label}>
+            <Popover trigger={"hover"} placement={"bottom-start"}>
+              <PopoverTrigger>
+                <RouterLink
+                  p={2}
+                  to={navItem.label === "MEN" ? "/mensproduct" : "/"}
+                  fontSize={"sm"}
+                  fontWeight={500}
+                  color={linkColor}
+                >
+                  {navItem.label}
+                </RouterLink>
+              </PopoverTrigger>
 
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
-        </Box>)
-      ))}
+              {navItem.children && (
+                <PopoverContent
+                  border={0}
+                  boxShadow={"xl"}
+                  bg={popoverContentBgColor}
+                  p={4}
+                  rounded={"xl"}
+                  minW={"sm"}
+                >
+                  <Stack>
+                    {navItem.children.map((child) => (
+                      <DesktopSubNav key={child.label} {...child} />
+                    ))}
+                  </Stack>
+                </PopoverContent>
+              )}
+            </Popover>
+          </Box>
+        )
+      )}
     </Stack>
   );
 };
@@ -322,7 +329,7 @@ const NAV_ITEMS = [
     children: [
       {
         label: <HoverMenu />,
-       to: "/mensProduct",
+        to: "/mensProduct",
       },
     ],
   },
@@ -330,7 +337,7 @@ const NAV_ITEMS = [
     label: "WOMEN",
     children: [
       {
-        label: <Hoverwoman/>,
+        label: <Hoverwoman />,
         href: "#",
       },
     ],
@@ -339,18 +346,18 @@ const NAV_ITEMS = [
     label: "KIDS",
     children: [
       {
-        label: <Hoverkids/>,
+        label: <Hoverkids />,
         href: "#",
       },
-    ]
+    ],
   },
   {
     label: "HOME",
     children: [
       {
-        label: <HoverHome/>,
+        label: <HoverHome />,
         href: "#",
       },
-    ]
+    ],
   },
 ];
