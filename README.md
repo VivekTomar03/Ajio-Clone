@@ -1,6 +1,4 @@
 # shrill-yam-9521
-shrill-yam-9521
-
 
 # Outfitr  (Ajio - Clone)
 
@@ -24,62 +22,60 @@ A Collaborative project built by a team of 5 executed in 5 days.
 ## Snapshots :camera:
 * Landing page (Home page) 
 
-![Landing page (Home page)] 
+
 <img src="./outfitr/src/images/Screenshot (35).png"/>
 
 * Sign-In page
-
-![Sign-IN page]  
+ 
 
 <img src="./outfitr/src/images/Screenshot (44).png"/>
 
 * Landing page (Mens page) 
 
-![Landing page (Mens page)] 
 <img src="./outfitr/src/images/Screenshot (37).png"/>
 
 
 * Landing page (Womens page) 
 
-![Landing page (Womens page)] 
+
 <img src="./outfitr/src/images/Screenshot (38).png"/>
 
 
 * Product page
 
-![Product page]  
+
 
 <img src="./outfitr/src/images/Screenshot (39).png"/>
 
 
 * Single Product page
 
-![Single Product page]  
+
 
 <img src="./outfitr/src/images/Screenshot (40).png"/>
 
 
 * Cart page
 
-![Cart page]  
+ 
 
 <img src="./outfitr/src/images/Screenshot (41).png"/>
 
 * Payment page
 
-![Payment page]  
+
 
 <img src="./outfitr/src/images/Screenshot (42).png"/>
 
 * Admin Signin page
 
-![Admin Signin page]  
+
 <img src="./outfitr/src/images/Screenshot (45).png"/>
 
 
 *Admin page
 
-![Admin page] 
+
 <img src="./outfitr/src/images/Screenshot (46).png"/>
 
 
@@ -90,7 +86,7 @@ A Collaborative project built by a team of 5 executed in 5 days.
 
 
 - 👤 [Vivek Singh Tomar](https://github.com/VivekTomar03)
-- 👤 [Sagar Bisht]()
+- 👤 [Sagar Bisht](https://github.com/Sagarbisht07)
 - 👤 [Vivek Kumar](https://github.com/VivekKumar2380)
 - 👤 [Akash Gupta](https://github.com/akashgupta157)
 - 👤 [Ravindra](https://github.com/ravindra121q)
